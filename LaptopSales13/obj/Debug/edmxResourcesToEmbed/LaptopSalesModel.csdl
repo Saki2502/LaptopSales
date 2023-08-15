@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PasokonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="AccountID" />
+    </Key>
+    <Property Name="AccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Role" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_Accounts" FromRole="Accounts" ToRole="Customers" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Accounts" FromRole="Accounts" ToRole="Employees" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Products_Categories" FromRole="Categories" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AccountID" Type="Int32" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Customers_Accounts" FromRole="Customers" ToRole="Accounts" />
+    <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoices_Customers" FromRole="Customers" ToRole="Invoices" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LastName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AccountID" Type="Int32" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Employees_Accounts" FromRole="Employees" ToRole="Accounts" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+    </Key>
+    <Property Name="InvoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TotalPrice" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Invoices_Customers" FromRole="Invoices" ToRole="Customers" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_Invoices_Orders" FromRole="Invoices" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderID" />
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Quantity" Type="Int16" Nullable="false" />
+    <Property Name="Discount" Type="Single" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetails_Orders" FromRole="OrderDetails" ToRole="Orders" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetails_Products" FromRole="OrderDetails" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="Byte" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="EmployeeID" Type="Int32" />
+    <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoices_Orders" FromRole="Orders" ToRole="Invoices" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Quantity" Type="Int16" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="SupplierID" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Products_Categories" FromRole="Products" ToRole="Categories" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Products" FromRole="Products" ToRole="OrderDetails" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK_Products_Suppliers" FromRole="Products" ToRole="Suppliers" />
+    <NavigationProperty Name="ProductTags" Relationship="Self.FK_ProductTag_Products" FromRole="Products" ToRole="ProductTag" />
+  </EntityType>
+  <EntityType Name="ProductTag">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TagID" Type="Int32" />
+    <Property Name="ProductID" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_ProductTag_Products" FromRole="ProductTag" ToRole="Products" />
+    <NavigationProperty Name="Tag" Relationship="Self.FK_ProductTag_Tag" FromRole="ProductTag" ToRole="Tag" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="SupplierID" />
+    </Key>
+    <Property Name="SupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Products_Suppliers" FromRole="Suppliers" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="TagID" />
+    </Key>
+    <Property Name="TagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TagName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ProductTags" Relationship="Self.FK_ProductTag_Tag" FromRole="Tag" ToRole="ProductTag" />
+  </EntityType>
+  <Association Name="FK_Customers_Accounts">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountID" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="AccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employees_Accounts">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountID" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="AccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Categories">
+    <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoices_Customers">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Invoices" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Invoices">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoices_Orders">
+    <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+    <End Role="Invoices" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="Invoices">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails_Orders">
+    <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Suppliers">
+    <End Role="Suppliers" Type="Self.Supplier" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Suppliers">
+        <PropertyRef Name="SupplierID" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductTag_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="ProductTag" Type="Self.ProductTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProductTag">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductTag_Tag">
+    <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
+    <End Role="ProductTag" Type="Self.ProductTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="TagID" />
+      </Principal>
+      <Dependent Role="ProductTag">
+        <PropertyRef Name="TagID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PasokonEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Invoices" EntityType="Self.Invoice" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProductTags" EntityType="Self.ProductTag" />
+    <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+    <EntitySet Name="Tags" EntityType="Self.Tag" />
+    <AssociationSet Name="FK_Customers_Accounts" Association="Self.FK_Customers_Accounts">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employees_Accounts" Association="Self.FK_Employees_Accounts">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoices_Customers" Association="Self.FK_Invoices_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Invoices" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoices_Orders" Association="Self.FK_Invoices_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Invoices" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails_Products" Association="Self.FK_OrderDetails_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Suppliers" Association="Self.FK_Products_Suppliers">
+      <End Role="Suppliers" EntitySet="Suppliers" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductTag_Products" Association="Self.FK_ProductTag_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductTag" EntitySet="ProductTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductTag_Tag" Association="Self.FK_ProductTag_Tag">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="ProductTag" EntitySet="ProductTags" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

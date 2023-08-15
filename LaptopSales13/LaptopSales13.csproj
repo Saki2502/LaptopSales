@@ -361,57 +361,57 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Account.cs">
+    <Compile Include="Account.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Category.cs">
+    <Compile Include="Category.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Customer.cs">
+    <Compile Include="Customer.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Employee.cs">
+    <Compile Include="Employee.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Invoice.cs">
+    <Compile Include="Invoice.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LaptopSalesModel.Context.cs">
+    <Compile Include="LaptopSalesModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LaptopSalesModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LaptopSalesModel.cs">
+    <Compile Include="LaptopSalesModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LaptopSalesModel.Designer.cs">
+    <Compile Include="LaptopSalesModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LaptopSalesModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Order.cs">
+    <Compile Include="Order.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OrderDetail.cs">
+    <Compile Include="OrderDetail.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Product.cs">
+    <Compile Include="Product.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductTag.cs">
+    <Compile Include="ProductTag.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Supplier.cs">
+    <Compile Include="Supplier.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Tag.cs">
+    <Compile Include="Tag.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -437,12 +437,12 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\LaptopSalesModel.Context.tt">
+    <Content Include="LaptopSalesModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LaptopSalesModel.edmx</DependentUpon>
       <LastGenOutput>LaptopSalesModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\LaptopSalesModel.tt">
+    <Content Include="LaptopSalesModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LaptopSalesModel.edmx</DependentUpon>
       <LastGenOutput>LaptopSalesModel.cs</LastGenOutput>
@@ -453,11 +453,11 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\LaptopSalesModel.edmx">
+    <EntityDeploy Include="LaptopSalesModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LaptopSalesModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\LaptopSalesModel.edmx.diagram">
+    <Content Include="LaptopSalesModel.edmx.diagram">
       <DependentUpon>LaptopSalesModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -485,13 +485,14 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Categories\CategoryPartial.cshtml" />
+    <Content Include="Views\Category\CategoryPartial.cshtml" />
     <Content Include="Views\Layout\_Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\" />
     <Folder Include="Content\js\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
