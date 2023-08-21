@@ -808,11 +808,13 @@ a[class*='card'] {
     background: rgba(0, 0, 0, 0.5); }
   .card-product-grid:hover .btn-overlay {
     opacity: 1; }
-  .card-product-grid:hover {
-    -webkit-box-shadow: 0 4px 15px rgba(153, 153, 153, 0.3);
-            box-shadow: 0 4px 15px rgba(153, 153, 153, 0.3);
-    -webkit-transition: .3s;
-    transition: .3s; }
+    .card-product-grid:hover {
+        -webkit-box-shadow: 0 4px 15px rgba(153, 153, 153, 0.3);
+        box-shadow: 0 4px 15px rgba(153, 153, 153, 0.3);
+        -webkit-transition: .3s;
+        transition: .3s;        
+        border-radius: 5px;
+    }
 
 .item-slide .card-product-grid {
   margin-bottom: 0; }

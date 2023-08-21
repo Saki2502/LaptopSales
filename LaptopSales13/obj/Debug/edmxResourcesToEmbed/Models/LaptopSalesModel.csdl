@@ -95,10 +95,18 @@
     <Property Name="Quantity" Type="Int16" />
     <Property Name="CategoryID" Type="Int32" />
     <Property Name="SupplierID" Type="Int32" />
+    <Property Name="CPU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VGA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RAM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="SSD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Pin" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Weight" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Category" Relationship="Self.FK_Products_Categories" FromRole="Products" ToRole="Categories" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Products" FromRole="Products" ToRole="OrderDetails" />
     <NavigationProperty Name="Supplier" Relationship="Self.FK_Products_Suppliers" FromRole="Products" ToRole="Suppliers" />
     <NavigationProperty Name="ProductTags" Relationship="Self.FK_ProductTag_Products" FromRole="Products" ToRole="ProductTag" />
+    <Property Name="BrandID" Type="Int32" />
+    <NavigationProperty Name="Brand" Relationship="PasokonModel.FK_Products_Brands" FromRole="Product" ToRole="Brand" />
   </EntityType>
   <EntityType Name="ProductTag">
     <Key>
@@ -300,5 +308,30 @@
       <End Role="Tag" EntitySet="Tags" />
       <End Role="ProductTag" EntitySet="ProductTags" />
     </AssociationSet>
+    <EntitySet Name="Brands" EntityType="PasokonModel.Brand" />
+    <AssociationSet Name="FK_Products_Brands" Association="PasokonModel.FK_Products_Brands">
+      <End Role="Brand" EntitySet="Brands" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="BrandID" />
+    </Key>
+    <Property Name="BrandID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BrandName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="PasokonModel.FK_Products_Brands" FromRole="Brand" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK_Products_Brands">
+    <End Type="PasokonModel.Brand" Role="Brand" Multiplicity="0..1" />
+    <End Type="PasokonModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="BrandID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="BrandID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

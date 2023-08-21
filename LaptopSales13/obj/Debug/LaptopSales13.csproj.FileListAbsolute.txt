@@ -164,3 +164,7 @@ C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\obj\Debug\LaptopSales1
 C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\obj\Debug\LaptopSales13.csproj.CopyComplete
 C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\obj\Debug\LaptopSales13.dll
 C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\obj\Debug\LaptopSales13.pdb
+C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\bin\PagedList.dll
+C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\bin\PagedList.Mvc.dll
+C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\bin\PagedList.xml
+C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\bin\PagedList.Mvc.xml
