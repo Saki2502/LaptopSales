@@ -1,0 +1,62 @@
+﻿@model LaptopSales13.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Layout/_Index.cshtml";
+}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+
+    <!-- ============================ COMPONENT REGISTER   ================================= -->
+    <div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+        <article class="card-body">
+            <header class="mb-4"><h4 class="card-title">ĐĂNG KÝ TÀI KHOẢN</h4></header>
+            <hr class="mb-4" />
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <form>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label>Username</label>
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        @*<input type="text" class="form-control" placeholder="Nhập username">
+                            <small class="form-text text-muted"></small>*@
+                        @if (ViewBag.error != null)
+                        {
+                            <span class="badge badge-danger">@ViewBag.error</span>
+                        }
+                    </div> <!-- form-group username end.// -->
+                    <div class="form-group">
+                        <label>Password</label>
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        @*<input type="text" class="form-control" placeholder="Nhập password">
+                            <small class="form-text text-muted"></small>*@
+                    </div> <!-- form-group password end.// -->
+                    <div class="form-group">
+                        <label>Nhập lại password</label>
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div> <!-- form-group repeat password end.// -->
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Đăng ký  </button>
+                    </div> <!-- form-group// -->
+                    @*<div class="form-group">
+                            <label class="custom-control custom-checkbox"> <input type="checkbox" class="custom-control-input" checked=""> <div class="custom-control-label"> I am agree with <a href="#">terms and contitions</a>  </div> </label>
+                        </div>*@ <!-- form-group end.// -->
+                </form>
+            }
+        </article><!-- card-body.// -->
+    </div> <!-- card .// -->
+    <p class="text-center mt-4">Đã có tài khoản? <a href="@Url.Action("LogIn", "Account")">Đăng nhập</a></p>
+    <br><br>
+    <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+
+
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+

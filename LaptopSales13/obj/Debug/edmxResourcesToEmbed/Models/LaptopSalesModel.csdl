@@ -77,11 +77,12 @@
     </Key>
     <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="OrderDate" Type="DateTime" Precision="3" />
-    <Property Name="Status" Type="Byte" />
+    <Property Name="Status" Type="String" />
     <Property Name="CustomerID" Type="Int32" />
     <Property Name="EmployeeID" Type="Int32" />
     <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoices_Orders" FromRole="Orders" ToRole="Invoices" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
+    <Property Name="PayType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Product">
     <Key>

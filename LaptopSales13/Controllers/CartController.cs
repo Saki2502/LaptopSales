@@ -84,42 +84,51 @@ namespace LaptopSales13.Controllers
             return View("Index");
         }
 
-        public ActionResult CheckOut()
+        public ActionResult Checkout()
         {
-            return View("CheckOut");
+            return View("Checkout");
         }
 
         public ActionResult ProcessOrder(FormCollection frc)
         {
             List<CartModels> listCart = (List<CartModels>)Session["Cart"];
-            //1. Save the order into Order table
-            var order = new LaptopSales13.Models.Order();
+
+            var customer = new LaptopSales13.Models.Customer()
             {
-                //OrderDate = frc["cusName"],
-                //CustomerPhone = frc["cusPhone"],
-                //CustomerEmail = frc["cusEmail"],
-                //CustomerAddress = frc["cusAddress"],
-                //OrderDate = DateTime.Now,
-                //PaymentType = "Cash",
-                //Status = "Processing"
+                FirstName = frc["firstName"],
+                LastName = frc["lastName"],
+                PhoneNumber = frc["phone"],
+                Email = frc["email"],
+                Address = frc["address"]
+            };
+            db.Customers.Add(customer);
+            db.SaveChanges();
+
+            //1. Lưu thông tin vào bảng Orders
+            var order = new LaptopSales13.Models.Order()
+            {
+                CustomerID = customer.CustomerID,
+                OrderDate = DateTime.Now,
+                //PayType = "Cash",
+                Status = "Processing"
             };
             db.Orders.Add(order);
             db.SaveChanges();
 
-            //2. Save the order detail into Order Detail table
+            //2. Lưu thông tin vào bảng Order Details
             foreach (CartModels cart in listCart)
             {
                 OrderDetail orderDetail = new OrderDetail()
                 {
                     OrderID = order.OrderID,
                     ProductID = cart.Product.ProductID,
-                    Quantity = short.Parse(cart.Quantity.ToString())
-                    //Price = cart.Product.Price
+                    Quantity = short.Parse(cart.Quantity.ToString()),
+                    UnitPrice = decimal.Parse(cart.Product.Price.ToString())
                 };
                 db.OrderDetails.Add(orderDetail);
                 db.SaveChanges();
             }
-            //3. Remove shopping cart session
+            //3. xóa giỏ hàng khỏi session
             Session.Remove("Cart");
             return View("OrderSuccess");
         }

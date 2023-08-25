@@ -74,9 +74,10 @@
     </Key>
     <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="OrderDate" Type="datetime" />
-    <Property Name="Status" Type="tinyint" />
+    <Property Name="Status" Type="nvarchar" MaxLength="100" />
     <Property Name="CustomerID" Type="int" />
     <Property Name="EmployeeID" Type="int" />
+    <Property Name="PayType" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Products">
     <Key>

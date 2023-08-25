@@ -79,9 +79,10 @@
           </Key>
           <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OrderDate" Type="datetime" />
-          <Property Name="Status" Type="tinyint" />
+          <Property Name="Status" Type="nvarchar" MaxLength="100" />
           <Property Name="CustomerID" Type="int" />
           <Property Name="EmployeeID" Type="int" />
+          <Property Name="PayType" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -398,11 +399,12 @@
           </Key>
           <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OrderDate" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Byte" />
+          <Property Name="Status" Type="String" />
           <Property Name="CustomerID" Type="Int32" />
           <Property Name="EmployeeID" Type="Int32" />
           <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoices_Orders" FromRole="Orders" ToRole="Invoices" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
+          <Property Name="PayType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -730,6 +732,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="PasokonModel.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />

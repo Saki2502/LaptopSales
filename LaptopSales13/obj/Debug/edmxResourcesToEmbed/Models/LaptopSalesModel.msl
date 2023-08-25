@@ -70,6 +70,7 @@
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="PasokonModel.Order">
         <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="PayType" ColumnName="PayType" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
           <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
           <ScalarProperty Name="Status" ColumnName="Status" />

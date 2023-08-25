@@ -19,8 +19,10 @@ namespace LaptopSales13.Controllers
             return View();
         }
 
-        public PartialViewResult ProductListPartial(int? page, int? category)
+        public PartialViewResult ProductListPartial(int? page, int? category, string sort)
         {
+            //ViewBag.Sort = sort;
+
             var pageNumber = page ?? 1;
             var pageSize = 20;
             var cate = db.Categories.Where(s => s.CategoryID == category).Select(s => new { s.CategoryName }).Take(1);
@@ -30,11 +32,40 @@ namespace LaptopSales13.Controllers
             }
             if (category != null)
             {
-                ViewBag.category = category;                
-                var productList = db.Products
-                                .OrderByDescending(x => x.ProductID)
-                                .Where(x => x.CategoryID == category)
-                                .ToPagedList(pageNumber, pageSize);
+                ViewBag.category = category;
+                PagedList<Product> productList = null;
+
+                if (sort == null)
+                {
+                    productList = (PagedList<Product>)db.Products
+                                    .OrderByDescending(x => x.ProductID)
+                                    .Where(x => x.CategoryID == category)
+                                    .ToPagedList(pageNumber, pageSize);
+                }
+                else
+                {
+                    if (sort == "Giá giảm dần")
+                    {
+                        productList = (PagedList<Product>)db.Products
+                                    .OrderByDescending(x => x.Price)
+                                    .Where(x => x.CategoryID == category)
+                                    .ToPagedList(pageNumber, pageSize);
+                    }
+                    else if (sort == "Giá tăng dần")
+                    {
+                        productList = (PagedList<Product>)db.Products
+                                    .OrderBy(x => x.Price)
+                                    .Where(x => x.CategoryID == category)
+                                    .ToPagedList(pageNumber, pageSize);
+                    }
+                    else if (sort == "Tên A-Z")
+                    {
+                        productList = (PagedList<Product>)db.Products
+                                    .OrderBy(x => x.ProductName)
+                                    .Where(x => x.CategoryID == category)
+                                    .ToPagedList(pageNumber, pageSize);
+                    }                         
+                }
                 return PartialView(productList);
             }
             else
@@ -57,6 +88,13 @@ namespace LaptopSales13.Controllers
                 return HttpNotFound();
             }
             return View(product);
+        }
+
+        // Search sản phẩm
+        public ActionResult Search(string key)
+        {
+            var names = db.Products.Where(p => p.ProductName.Contains(key)).Select(p => p.ProductName).ToList();
+            return Json(names, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Product/Create
