@@ -60,19 +60,16 @@
                     <div class="col-xl-6 col-lg-5 col-md-6">
                         <form action="/search" class="search-header" method="get">
                             <div class="input-group w-100">
-                                @*<select class="custom-select border-right" name="category_name">
-                                        <option value="">All type</option>
-                                        <option value="codex">Special</option>
-                                        <option value="comments">Only best</option>
-                                        <option value="content">Latest</option>
-                                    </select>*@
-                                <input type="text" id="keyword" class="form-control" placeholder="Nhập tên sản phẩm, từ khóa cần tìm">
+                                @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+                                {   
+                                    <input type="text" id="keyword" name="keyword" value="@ViewBag.keyword" class="form-control" placeholder="Nhập tên sản phẩm, từ khóa cần tìm">
 
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fa fa-search"></i> Search
-                                    </button>
-                                </div>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="fa fa-search"></i> Search
+                                        </button>
+                                    </div>
+                                }
                             </div>
                         </form> <!-- search-wrap .end// -->
                     </div> <!-- col.// -->
@@ -129,7 +126,7 @@
                                     <div class="icon-area">
                                         <i class="fa fa-store"></i>
                                     </div>
-                                    <small class="text"> Orders </small>
+                                    <small class="text"> Đơn hàng </small>
                                 </a>
                             </div>
                             <div class="widget-header">

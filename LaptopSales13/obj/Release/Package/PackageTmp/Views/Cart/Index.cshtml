@@ -1,0 +1,181 @@
+﻿@using LaptopSales13.Models;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/_Index.cshtml";
+}
+
+<!-- Breadcrumb -->
+<nav class="flex-fill">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
+    </ol>
+</nav>
+<!-- Breadcrumb -->
+<!-- cart + summary -->
+@{
+    if (Session["Cart"] != null)
+    {
+
+        using (Html.BeginForm("UpdateCart", "Cart", FormMethod.Post))
+        {
+            <section class="section-content padding-y">
+                <header class="section-heading">
+                    <h2 class="section-title">Giỏ hàng</h2>
+                </header><!-- sect-heading -->
+                <div class="container">
+
+                    <div class="row">
+                        <main class="col-md-9">
+                            <div class="card">
+
+                                <table class="table table-borderless table-shopping-cart">
+                                    <thead class="text-muted">
+                                        <tr class="small text-uppercase">
+                                            <th scope="col">Product</th>
+                                            <th scope="col" width="120">Quantity</th>
+                                            <th scope="col" width="120">Price</th>
+                                            <th scope="col" class="text-right" width="200"> </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var cart in (List<CartModels>)Session["Cart"])
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <figure class="itemside">
+                                                        <div class="aside"><img src="@Url.Content(cart.Product.ImageURL)" style="width: 180px"></div>
+                                                        <figcaption class="info">
+                                                            <a href="@Url.Action("Details", "Product", new { id = cart.Product.ProductID})" class="title text-dark">@cart.Product.ProductName</a>
+                                                            <p class="text-muted small">CPU: @cart.Product.CPU, VGA: @cart.Product.VGA, <br> Brand: @cart.Product.Brand.BrandName</p>
+                                                        </figcaption>
+                                                    </figure>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="quantity" id="quantity" value="@cart.Quantity" class="w-100" />
+                                                    <span id="errmsg" class="text-nowrap"></span>
+                                                </td>
+                                                <td>
+                                                    <div class="price-wrap">
+                                                        <var class="price">@(String.Format("{0:N0}", (cart.Product.Price*cart.Quantity)))&#8363;</var>
+                                                        <small class="text-muted text-nowrap"> @(String.Format("{0:N0}", cart.Product.Price))&#8363; / 1 món </small>
+                                                    </div> <!-- price-wrap .// -->
+                                                </td>
+                                                <td class="text-right">
+                                                    <a href="@Url.Action("Delete", "Cart", new { id = cart.Product.ProductID })"
+                                                       onclick="return confirm ('Bạn muốn xóa sản phẩm này?')" class="btn btn-light"> Xóa sản phẩm</a>
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+
+                                <div class="card-body border-top">
+                                    <a href="@Url.Action("Checkout", "Cart", null)" class="btn btn-primary float-md-right"> Thanh toán <i class="fa fa-chevron-right"></i> </a>
+                                    <a href="@Url.Action("Index", "Home", null)" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Tiếp tục mua sắm </a>
+                                </div>
+                            </div> <!-- card.// -->
+
+                            <div class="alert alert-success mt-3">
+                                <p class="icontext"><i class="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
+                            </div>
+
+                        </main> <!-- col.// -->
+                        <aside class="col-md-3">
+                            <!--<div class="card mb-3">
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label>Have coupon?</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="" placeholder="Coupon code">
+                                                <span class="input-group-append">
+                                                    <button class="btn btn-primary">Apply</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>-->
+                            <!-- card-body.// -->
+                            <!--</div>-->  <!-- card .// -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <dl class="dlist-align">
+                                        <dt>Tạm tính:</dt>
+                                        @{
+                                            List<CartModels> tam = (List<CartModels>)Session["Cart"];
+                                            var total = String.Format("{0:N0}", tam.Sum(x => x.Quantity * x.Product.Price));
+                                        }
+                                        <dd class="text-right">@total&#8363;</dd>
+                                    </dl>
+                                    <dl class="dlist-align">
+                                        <dt>Discount:</dt>
+                                        <dd class="text-right">0</dd>
+                                    </dl>
+                                    <dl class="dlist-align">
+                                        <dt><strong>Tổng tiền:</strong></dt>
+                                        @{
+                                            List<CartModels> temp = (List<CartModels>)Session["Cart"];
+                                            var totalPrice = String.Format("{0:N0}", temp.Sum(x => x.Quantity * x.Product.Price));
+                                        }
+                                        <dd class="text-right  h5"><strong>@totalPrice&#8363;</strong></dd>
+                                    </dl>
+                                    <hr>
+                                    <p class="text-center mb-3">
+                                        <img src="~/Content/images/misc/payments.png" height="26">
+                                    </p>
+
+                                </div> <!-- card-body.// -->
+                            </div>  <!-- card .// -->
+                        </aside> <!-- col.// -->
+                    </div>
+
+                </div> <!-- container .//  -->
+            </section>
+            <!-- ========================= SECTION CONTENT END// ========================= -->
+
+            <!-- ========================= SECTION  ========================= -->
+            <section class="section-name border-top padding-y">
+                <div class="container">
+                    <h6>Payment and refund policy</h6>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+
+                </div><!-- container // -->
+            </section>
+            <!-- ========================= SECTION  END// ========================= -->
+        }
+    }
+    else
+    {
+        <h4> Không có sản phẩm nào trong giỏ hàng!!!</h4>
+    }
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#quantity").keypress(function (e) {
+            //Bắt lỗi không nhập số
+            var charCode = (e.which) ? e.which : e.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                $("#errmsg").html("Chỉ nhập số!").show().fadeOut("slow");
+                return false;
+            }
+        });
+    });
+</script>

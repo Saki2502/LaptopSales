@@ -18,12 +18,6 @@ namespace LaptopSales13
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-
-            routes.MapRoute(
-                name: "Search",
-                url: "search",
-                defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional }
-            );
         }
     }
 }

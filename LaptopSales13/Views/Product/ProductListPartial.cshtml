@@ -18,17 +18,7 @@
         <h2 class="section-title">@ViewBag.CateName</h2>
     </header><!-- sect-heading -->
     <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-2"><strong>Chọn theo khoảng giá:</strong></div> <!-- col.// -->
-                <div class="col-md-10">
-                    <ul class="list-inline">
-                        <li class="list-inline-item pr-4"><a href="#">Dưới 15 triệu</a></li>
-                        <li class="list-inline-item pr-4"><a href="#">Từ 15-25 triệu</a></li>
-                        <li class="list-inline-item pr-4"><a href="#">Trên 25 triệu</a></li>
-                    </ul>
-                </div> <!-- col.// -->
-            </div> <!-- row.// -->
+        <div class="card-body">            
             <div class="row">
                 <div class="col-md-2"><strong>Chọn theo tiêu chí:</strong></div> <!-- col.// -->
                 <div class="col-md-10">
@@ -36,22 +26,19 @@
                         <li class="list-inline-item pr-4 dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Thương hiệu </a>
                             <ul class="dropdown-menu p-3" style="max-width:400px;">
-                                <li><a class="dropdown-item" href="#">ASUS</a></li>
+                                @foreach (var b in @ViewBag.BrandName)
+                                {
+                                    <li><a class="dropdown-item" href="@Url.Action("Index", "Product", new {page = 1, category = ViewBag.category, fbrand = b})">@b</a></li>
+                                }
                             </ul> <!-- dropdown-menu.// -->
                         </li>
+
                         <li class="list-inline-item pr-4 dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> CPU </a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Khoảng giá </a>
                             <div class="dropdown-menu p-3" style="max-width:400px;">
-                                <a class="dropdown-item" href="#">Intel</a>
-                                <a class="dropdown-item" href="#">Ryzen</a>
-                            </div> <!-- dropdown-menu.// -->
-                        </li>
-                        <li class="list-inline-item pr-4 dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> RAM </a>
-                            <div class="dropdown-menu p-3" style="max-width:400px;">
-                                <a class="dropdown-item" href="#">8GB</a>
-                                <a class="dropdown-item" href="#">16GB</a>
-                                <a class="dropdown-item" href="#">32GB</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Product", new {page = 1, category = ViewBag.category, fbrand = ViewBag.fbrand, fprice = "Dưới 15 triệu"})">Dưới 15 triệu</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Product", new {page = 1, category = ViewBag.category, fbrand = ViewBag.fbrand, fprice = "Từ 15 - 25 triệu"})">Từ 15 - 25 triệu</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Product", new {page = 1, category = ViewBag.category, fbrand = ViewBag.fbrand, fprice = "Trên 25 triệu"})">Trên 25 triệu</a>
                             </div> <!-- dropdown-menu.// -->
                         </li>
                     </ul>
@@ -61,9 +48,9 @@
                 <div class="col-md-2"><strong>Sắp xếp theo:</strong></div> <!-- col.// -->
                 <div class="col-md-10">
                     <ul class="list-inline">                        
-                        <li class="list-inline-item pr-4"><a href="@Url.Action("Index", "Product", new {page = 1, category = ViewBag.category, sort = "Giá tăng dần"})">Giá tăng dần</a></li>
-                        <li class="list-inline-item pr-4"><a href="@Url.Action("Index", "Product", new {page = 1, category = ViewBag.category, sort = "Giá giảm dần"})">Giá giảm dần</a></li>
-                        <li class="list-inline-item pr-4"><a href="@Url.Action("Index", "Product", new {page = 1, category = ViewBag.category, sort = "Tên A-Z"})">Tên A-Z</a></li>
+                        <li class="list-inline-item pr-4"><a href="@Url.Action("Index", "Product", new {page = 1, category = ViewBag.category, fbrand = ViewBag.fbrand, fprice = ViewBag.fprice, sort = "Giá tăng dần", keyword = ViewBag.keyword})">Giá tăng dần</a></li>
+                        <li class="list-inline-item pr-4"><a href="@Url.Action("Index", "Product", new {page = 1, category = ViewBag.category, fbrand = ViewBag.fbrand, fprice = ViewBag.fprice, sort = "Giá giảm dần", keyword = ViewBag.keyword})">Giá giảm dần</a></li>
+                        <li class="list-inline-item pr-4"><a href="@Url.Action("Index", "Product", new {page = 1, category = ViewBag.category, fbrand = ViewBag.fbrand, fprice = ViewBag.fprice, sort = "Tên A-Z", keyword = ViewBag.keyword})">Tên A-Z</a></li>
                     </ul>
                 </div> <!-- col.// -->
             </div> <!-- row.// -->
@@ -122,6 +109,6 @@
             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
         </li>*@
     <li class="page-item">
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, category = ViewBag.category }))
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, category = ViewBag.category, keyword = ViewBag.keyword }))
     </li>
 </ul>

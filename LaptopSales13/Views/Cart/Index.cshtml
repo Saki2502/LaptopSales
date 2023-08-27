@@ -12,6 +12,7 @@
     </ol>
 </nav>
 <!-- Breadcrumb -->
+
 <!-- cart + summary -->
 @{
     if (Session["Cart"] != null)
@@ -47,7 +48,14 @@
                                                         <div class="aside"><img src="@Url.Content(cart.Product.ImageURL)" style="width: 180px"></div>
                                                         <figcaption class="info">
                                                             <a href="@Url.Action("Details", "Product", new { id = cart.Product.ProductID})" class="title text-dark">@cart.Product.ProductName</a>
-                                                            <p class="text-muted small">CPU: @cart.Product.CPU, VGA: @cart.Product.VGA, <br> Brand: @cart.Product.Brand.BrandName</p>
+                                                            <div class="text-muted">
+                                                                @if (cart.Product.CPU != null && cart.Product.VGA!=null)
+                                                                {
+                                                                    <p class="small">CPU: @cart.Product.CPU, VGA: @cart.Product.VGA</p>
+                                                                }
+                                                                
+                                                                <p class="small">Brand: @cart.Product.Brand.BrandName</p>
+                                                             </div>
                                                         </figcaption>
                                                     </figure>
                                                 </td>
