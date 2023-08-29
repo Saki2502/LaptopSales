@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace PasokonProj.Areas.Admin
+namespace LaptopSales13.Areas.Admin
 {
     public class AdminAreaRegistration : AreaRegistration 
     {
@@ -17,7 +17,8 @@ namespace PasokonProj.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }, new[] { "PasokonProj.Areas.Admin.Controllers" }
+                new { action = "Index", id = UrlParameter.Optional },
+                new[] { "LaptopSales13.Areas.Admin.Controllers" }
             );
         }
     }

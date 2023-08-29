@@ -1,0 +1,7 @@
+﻿.content .pagination {
+    justify-content: center;
+}
+
+.content .pagination li {
+    padding-right: 10px;
+}

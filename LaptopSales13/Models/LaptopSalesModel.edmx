@@ -71,7 +71,7 @@
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="UnitPrice" Type="money" Nullable="false" />
           <Property Name="Quantity" Type="smallint" Nullable="false" />
-          <Property Name="Discount" Type="real" Nullable="false" />
+          <Property Name="Discount" Type="real" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -260,6 +260,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spCheckLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="PasokonModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
@@ -389,7 +393,7 @@
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Quantity" Type="Int16" Nullable="false" />
-          <Property Name="Discount" Type="Single" Nullable="false" />
+          <Property Name="Discount" Type="Single" />
           <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetails_Orders" FromRole="OrderDetails" ToRole="Orders" />
           <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetails_Products" FromRole="OrderDetails" ToRole="Products" />
         </EntityType>
@@ -399,7 +403,7 @@
           </Key>
           <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OrderDate" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="String" />
+          <Property Name="Status" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="CustomerID" Type="Int32" />
           <Property Name="EmployeeID" Type="Int32" />
           <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoices_Orders" FromRole="Orders" ToRole="Invoices" />
@@ -636,6 +640,10 @@
             <End Role="Brand" EntitySet="Brands" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
+          <FunctionImport Name="spCheckLogin">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Brand">
           <Key>
@@ -797,6 +805,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spCheckLogin" FunctionName="PasokonModel.Store.spCheckLogin" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

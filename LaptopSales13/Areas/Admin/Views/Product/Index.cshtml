@@ -1,0 +1,116 @@
+﻿﻿@model PagedList.IPagedList<LaptopSales13.Models.Product>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_IndexAdmin.cshtml";
+}
+
+<section class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Product</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                        <li class="breadcrumb-item active">Product</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <p class="pl-3">
+        <button class="btn-default">@Html.ActionLink("Thêm mới", "Create")</button>
+    </p>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <table class="table table-bordered">
+                <tr>
+                    <th>ProductName</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>CategoryName</th>
+                    <th>SupplierName</th>
+                    <th>CPU</th>
+                    <th>VGA</th>
+                    <th>RAM</th>
+                    <th>SSD</th>
+                    <th>Pin</th>
+                    <th>Weight</th>
+                    <th>BrandName</th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            <img src="@Url.Content(item.ImageURL)" width="50" height="50" />
+                        </td>
+                        <td>
+                            @(String.Format("{0:N0}", item.Price))&#8363;
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Supplier.CompanyName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CPU)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VGA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RAM)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SSD)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Pin)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Weight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Brand.BrandName)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+        <!-- Thêm mã phân trang -->
+
+        <div class="pt-lg-4">
+            <p class="float-left">Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</p>
+
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>
+
+        <!-- Kết thúc -->
+    </section>
+</section>

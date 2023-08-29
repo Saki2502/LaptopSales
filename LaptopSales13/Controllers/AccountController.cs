@@ -72,11 +72,12 @@ namespace LaptopSales13.Controllers
             if (ModelState.IsValid)
             {
                 var password = GetMD5(l.Password);
-                var data = db.Accounts.Where(s => s.UserName.Equals(l.Username) && s.Password.Equals(password)).ToList();
-                if (data.Count() > 0)
+
+                int check = db.spCheckLogin(l.Username, password);
+                if (check == 1)
                 {
                     //add session
-                    Session["UserID"] = data.FirstOrDefault().AccountID;
+                    //Session["UserID"] = data.FirstOrDefault().AccountID;
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -84,6 +85,19 @@ namespace LaptopSales13.Controllers
                     ViewBag.error = "Đăng nhập không thành công!";
                     return RedirectToAction("LogIn");
                 }
+
+                //var data = db.Accounts.Where(s => s.UserName.Equals(l.Username) && s.Password.Equals(password)).ToList();
+                //if (data.Count() > 0)
+                //{
+                //    //add session
+                //    Session["UserID"] = data.FirstOrDefault().AccountID;
+                //    return RedirectToAction("Index", "Home");
+                //}
+                //else
+                //{
+                //    ViewBag.error = "Đăng nhập không thành công!";
+                //    return RedirectToAction("LogIn");
+                //}
             }
             return View(l);
         }

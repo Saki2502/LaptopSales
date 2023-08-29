@@ -135,5 +135,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spCheckLogin" FunctionName="PasokonModel.Store.spCheckLogin" />
   </EntityContainerMapping>
 </Mapping>
