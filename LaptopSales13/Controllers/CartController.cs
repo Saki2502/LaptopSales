@@ -126,7 +126,8 @@ namespace LaptopSales13.Controllers
                     UnitPrice = decimal.Parse(cart.Product.Price.ToString())
                 };
                 db.OrderDetails.Add(orderDetail);
-                db.SaveChanges();
+                db.urUpdateSLSP();
+                db.SaveChanges();                
             }
             //3. xóa giỏ hàng khỏi session
             Session.Remove("Cart");

@@ -52,5 +52,10 @@ namespace LaptopSales13.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spCheckLogin", usernameParameter, passwordParameter);
         }
+    
+        public virtual int urUpdateSLSP()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("urUpdateSLSP");
+        }
     }
 }
