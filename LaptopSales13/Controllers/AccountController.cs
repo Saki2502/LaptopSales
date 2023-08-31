@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Scrypt;
 using System.Security.Cryptography;
 using System.Text;
+using LaptopSales13.Others;
 
 namespace LaptopSales13.Controllers
 {
@@ -40,10 +41,11 @@ namespace LaptopSales13.Controllers
                     return View();
                 }
                 else
-                {          
+                {
                     Account account = new Account();
                     account.UserName = r.Username;
-                    account.Password = GetMD5(r.Password);
+                    account.Password = Util.GetMD5(r.Password);
+                    account.Email = r.Email;
                     db.Configuration.ValidateOnSaveEnabled = false;
                     // Thêm người dùng  mới
                     db.Accounts.Add(account);
@@ -52,89 +54,55 @@ namespace LaptopSales13.Controllers
                     // Thông báo
                     ViewBag.error = "Đăng ký thành công! Vui lòng đăng nhập tài khoản";
                     // Trả về trang đăng nhập
-                    return RedirectToAction("Login");
+                    return RedirectToAction("LogIn");
                 }
             }
             return View();
         }
 
-        // Get: Đăng nhập
+        // Get: Account/LogIn
         public ActionResult LogIn()
         {
             return View();
         }
 
-        // Post: Đăng nhập
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DangNhap(LoginViewModel l)
-        {            
-            if (ModelState.IsValid)
-            {
-                var password = GetMD5(l.Password);
-
-                int check = db.spCheckLogin(l.Username, password);
-                if (check == 1)
-                {
-                    //add session
-                    //Session["UserID"] = data.FirstOrDefault().AccountID;
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ViewBag.error = "Đăng nhập không thành công!";
-                    return RedirectToAction("LogIn");
-                }
-
-                //var data = db.Accounts.Where(s => s.UserName.Equals(l.Username) && s.Password.Equals(password)).ToList();
-                //if (data.Count() > 0)
-                //{
-                //    //add session
-                //    Session["UserID"] = data.FirstOrDefault().AccountID;
-                //    return RedirectToAction("Index", "Home");
-                //}
-                //else
-                //{
-                //    ViewBag.error = "Đăng nhập không thành công!";
-                //    return RedirectToAction("LogIn");
-                //}
-            }
-            return View(l);
-        }
-
-        // Đăng nhập phân quyền
-        [HttpPost]
         public ActionResult LogIn(LoginViewModel l)
         {
-            string userName = l.Username.ToString();
-            var password = GetMD5(l.Password);
-            var islogin = db.Accounts.SingleOrDefault(x => x.UserName.Equals(userName) && x.Password.Equals(password));
-
-            if (islogin != null)
+            if (ModelState.IsValid)
             {
-                if (userName == "admin")
+                string userName = l.Username.ToString();
+                var password = GetMD5(l.Password);
+                var islogin = db.Accounts.SingleOrDefault(x => x.UserName.Equals(userName) && x.Password.Equals(password));
+
+                if (islogin != null)
                 {
-                    Session["use"] = islogin;
-                    return RedirectToAction("Index", "Admin/Home");
+                    Session["idUser"] = islogin.AccountID;
+                    if (userName == "admin")
+                    {
+                        Session["use"] = islogin;
+                        return RedirectToAction("Index", "Admin/Home");
+                    }
+                    else
+                    {
+                        Session["use"] = islogin;
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {
-                    Session["use"] = islogin;
-                    return RedirectToAction("Index", "Home");
+                    ViewBag.Fail = "Đăng nhập thất bại";
+                    return RedirectToAction("LogIn");
                 }
             }
-            else
-            {
-                ViewBag.Fail = "Đăng nhập thất bại";
-                return View("LogIn");
-            }
-
+            return View();
         }
 
         // Đăng xuất
         public ActionResult LogOut()
         {
-            Session.Clear();//remove session
+            //Session.Clear();//remove session
             Session["use"] = null;
             return RedirectToAction("Index", "Home");
         }

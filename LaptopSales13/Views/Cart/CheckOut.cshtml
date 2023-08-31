@@ -18,7 +18,7 @@
 
 @using (Html.BeginForm("ProcessOrder", "Cart", FormMethod.Post, new { id = "customer-form" }))
 {
-    <section class="bg-light py-5">
+    <section class="section-content padding-y">
         <div class="container">
             <div class="row">
                 <div class="col-xl-8 col-lg-8 mb-4">
@@ -29,16 +29,16 @@
                             <h5 class="card-title mb-3">Thông tin khách hàng</h5>
                             <div class="row">
                                 <div class="col-6 mb-3">
-                                    <p class="mb-0">Họ và tên lót</p>
+                                    <p class="mb-0">Họ và tên đệm</p>
                                     <div class="form-outline">
-                                        <input type="text" id="typeText" name="firstName" placeholder="Nhập họ và tên lót" class="form-control" />
+                                        <input type="text" id="typeText" name="firstName" class="form-control" />
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <p class="mb-0">Tên</p>
                                     <div class="form-outline">
-                                        <input type="text" id="typeText" name="lastName" placeholder="Nhập tên" class="form-control" />
+                                        <input type="text" id="typeText" name="lastName" class="form-control" />
                                     </div>
                                 </div>
 
@@ -53,6 +53,13 @@
                                     <p class="mb-0">Email</p>
                                     <div class="form-outline">
                                         <input type="email" id="typeEmail" name="email" placeholder="example@gmail.com" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <p class="mb-0">Địa chỉ</p>
+                                    <div class="form-outline">
+                                        <input type="text" id="typeAddress" name="address" class="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -92,27 +99,10 @@
 
                             <div class="row htnh" id="ntch" style="display: none">
                                 <div class="col-sm-12 mb-2">
-                                    <strong class="mb-1">Quý khách vui lòng chọn địa điểm nhận hàng phù hợp</strong>
-                                    <div class="form-outline">
-                                        <div class="pl-3">
-                                            <input class="form-check-input" type="radio" id="radio1" name="optradio" value="option1" checked />
-                                            <label class="form-check-label" for="radio2">
-                                                Nhận sản phẩm tại cửa hàng <br />
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-outline">
-                                        <div class="pl-3">
-                                            <input class="form-check-input" type="radio" id="radio2" name="optradio" value="option2" />
-                                            <label class="form-check-label" for="radio2">
-                                                Nhận sản phẩm tại cửa hàng <br />
-                                            </label>
-                                        </div>
-                                    </div>
+                                    <strong class="mb-1">Quý khách vui lòng đến 371 Nguyễn Kiệm, Gò Vấp để nhận hàng </strong>
 
                                 </div>
                                 <div class="col-sm-12 mb-2">
-                                    <p class="mb-0">Ghi chú</p>
                                     <div class="form-outline">
                                         <input type="text" id="typeText" placeholder="Nhập ghi chú nếu có" class="form-control" />
                                     </div>
@@ -121,12 +111,6 @@
 
                             <div class="row htnh" id="ghtn" style="display: none">
                                 <div class="col-sm-12 mb-2">
-                                    <p class="mb-0">Địa chỉ</p>
-                                    <div class="form-outline">
-                                        <input type="text" id="typeText" name="address" placeholder="Nhập địa chỉ cụ thể" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 mb-2">
                                     <p class="mb-0">Ghi chú</p>
                                     <div class="form-outline">
                                         <input type="text" id="typeText" placeholder="Nhập ghi chú nếu có" class="form-control" />
@@ -134,7 +118,38 @@
                                 </div>
                             </div>
 
+                            <hr class="my-4" />
 
+                            <h5 class="card-title mb-3">Chọn phương thức thanh toán</h5>
+
+                            <div class="row mb-3">
+                                <div class="col-lg-6 mb-2">
+                                    <!-- Default checked radio -->
+                                    <div class="form-check h-100 border rounded-3">
+                                        <div class="p-3">
+                                            <div class="p-3">
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked />
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    Cash <br />
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-2">
+                                    <!-- Default radio -->
+                                    <div class="form-check h-100 border rounded-3">
+                                        <div class="p-3">
+                                            <div class="p-3">
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
+                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                    Momo <br />
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="float-end">
                                 <button class="btn btn-light border">Cancel</button>

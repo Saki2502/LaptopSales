@@ -1,0 +1,89 @@
+﻿@model LaptopSales13.Models.Customer
+
+@{
+    ViewBag.Title = "MyProfile";
+    Layout = "~/Views/Layout/_Index.cshtml";
+}
+
+@{
+    var u = Session["use"] as LaptopSales13.Models.Account;
+}
+
+<!-- Breadcrumb -->
+<nav class="flex-fill">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Thông tin tài khoản</li>
+    </ol>
+</nav>
+<!-- Breadcrumb -->
+
+<section class="section-content padding-y">
+    <header class="section-heading">
+        <h2 class="section-title">Hồ sơ của tôi</h2>
+    </header><!-- sect-heading -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-xl-3">
+                <nav class="nav flex-lg-column w-100 d-flex nav-pills mb-4">
+                    <a class="nav-link my-0 active" href="/Customer/MyProfile"><p class="pb-0 mb-0" style="width: 100px">Hồ sơ</p></a>
+                    <a class="nav-link my-0 bg-light" href="/Customer/EditProfile"><p class="pb-0 mb-0" style="width: 120px">Chỉnh sửa hồ sơ</p></a>
+                    <a class="nav-link my-0 bg-light" href="#"><p class="pb-0 mb-0" style="width: 100px">Đổi mật khẩu</p></a>
+                    <a class="nav-link my-0 bg-light" href="/Account/LogOut"><p class="pb-0 mb-0" style="width: 100px">Đăng xuất</p></a>
+                </nav>
+            </div>
+
+            <main class="col-lg-9 col-xl-9">
+                <div class="card p-4 mb-0 shadow-0 border">
+                    <div class="content-body">
+                        @using (Html.BeginForm("MyProfile", "Customer", FormMethod.Get))
+                        {
+                            <form>
+                                <div class="row mb-3">
+                                    @{ if (u != null)
+                                        {
+
+
+                                            <label for="username" class="col-2 col-form-label">Tên đăng nhập</label>
+                                            <div class="col-10 form-outline">
+                                                <input type="text" readonly class="form-control-plaintext" id="username" value="@u.UserName">
+                                            </div>
+
+
+
+                                            <label for="staticEmail" class="col-2 col-form-label">Email</label>
+                                            <div class="col-10 form-outline">
+                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="@u.Email">
+                                            </div>
+
+
+
+                                            <label for="lastName" class="col-2 col-form-label">Họ và tên đệm</label>
+                                            <div class="col-5 form-outline">
+                                                <input type="text" readonly class="form-control-plaintext" id="lastName" value="@u.LastName">
+                                            </div>
+
+
+
+                                            <label for="firstName" class="col-2 col-form-label">Tên</label>
+                                            <div class="col-3 form-outline">
+                                                <input type="text" readonly class="form-control-plaintext" id="firstName" value="@u.FirstName">
+                                            </div>
+
+
+
+                                            <label for="address" class="col-2 col-form-label">Địa chỉ</label>
+                                            <div class="col-10 form-outline">
+                                                <input type="text" readonly class="form-control-plaintext" id="address" value="@u.Address">
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</section>

@@ -1,4 +1,5 @@
 ﻿using LaptopSales13.Models;
+using Microsoft.Owin.BuilderProperties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,46 +93,55 @@ namespace LaptopSales13.Controllers
         public ActionResult ProcessOrder(FormCollection frc)
         {
             List<CartModels> listCart = (List<CartModels>)Session["Cart"];
+            var u = Session["use"] as LaptopSales13.Models.Account;
 
-            var customer = new LaptopSales13.Models.Customer()
+            if (u == null)
             {
-                FirstName = frc["firstName"],
-                LastName = frc["lastName"],
-                PhoneNumber = frc["phone"],
-                Email = frc["email"],
-                Address = frc["address"]
-            };
-            db.Customers.Add(customer);
-            db.SaveChanges();
-
-            //1. Lưu thông tin vào bảng Orders
-            var order = new LaptopSales13.Models.Order()
-            {
-                CustomerID = customer.CustomerID,
-                OrderDate = DateTime.Now,
-                //PayType = "Cash",
-                Status = "Processing"
-            };
-            db.Orders.Add(order);
-            db.SaveChanges();
-
-            //2. Lưu thông tin vào bảng Order Details
-            foreach (CartModels cart in listCart)
-            {
-                OrderDetail orderDetail = new OrderDetail()
-                {
-                    OrderID = order.OrderID,
-                    ProductID = cart.Product.ProductID,
-                    Quantity = short.Parse(cart.Quantity.ToString()),
-                    UnitPrice = decimal.Parse(cart.Product.Price.ToString())
-                };
-                db.OrderDetails.Add(orderDetail);
-                db.urUpdateSLSP();
-                db.SaveChanges();                
+                return RedirectToAction("LogIn");
             }
-            //3. xóa giỏ hàng khỏi session
-            Session.Remove("Cart");
-            return View("OrderSuccess");
+            else
+            {
+
+                u.FirstName = frc["firstName"];
+                u.LastName = frc["lastName"];
+                u.PhoneNumber = frc["phone"];
+                u.Address = frc["address"];
+                var customer = new LaptopSales13.Models.Customer()
+                {
+                    AccountID = u.AccountID
+                };
+                db.Customers.Add(customer);
+                db.SaveChanges();
+
+                //1. Lưu thông tin vào bảng Orders
+                var order = new LaptopSales13.Models.Order()
+                {
+                    CustomerID = customer.CustomerID,
+                    OrderDate = DateTime.Now,
+                    PayType = frc[""],
+                    Status = "Chờ xác nhận"
+                };
+                db.Orders.Add(order);
+                db.SaveChanges();
+
+                //2. Lưu thông tin vào bảng Order Details
+                foreach (CartModels cart in listCart)
+                {
+                    OrderDetail orderDetail = new OrderDetail()
+                    {
+                        OrderID = order.OrderID,
+                        ProductID = cart.Product.ProductID,
+                        Quantity = short.Parse(cart.Quantity.ToString()),
+                        UnitPrice = decimal.Parse(cart.Product.Price.ToString())
+                    };
+                    db.OrderDetails.Add(orderDetail);
+                    db.urUpdateSLSP();
+                    db.SaveChanges();
+                }
+                //3. xóa giỏ hàng khỏi session
+                Session.Remove("Cart");
+                return View("OrderSuccess");
+            }  
         }
 
         // Work with Paypal Payment

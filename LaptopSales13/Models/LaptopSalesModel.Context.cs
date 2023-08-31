@@ -28,6 +28,7 @@ namespace LaptopSales13.Models
         }
     
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
@@ -38,7 +39,6 @@ namespace LaptopSales13.Models
         public virtual DbSet<ProductTag> ProductTags { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
-        public virtual DbSet<Brand> Brands { get; set; }
     
         public virtual int spCheckLogin(string username, string password)
         {

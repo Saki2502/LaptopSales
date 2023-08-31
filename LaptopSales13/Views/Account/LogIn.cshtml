@@ -15,14 +15,17 @@
             @using (Html.BeginForm("LogIn", "Account", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
+
                 <form>
                     <a href="#" class="btn btn-facebook btn-block mb-2"> <i class="fab fa-facebook-f"></i> &nbsp  Sign in with Facebook</a>
                     <a href="#" class="btn btn-google btn-block mb-4"> <i class="fab fa-google"></i> &nbsp  Sign in with Google</a>
                     <div class="form-group">
                         @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập username ..." } })
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
                     </div> <!-- form-group// -->
                     <div class="form-group">
                         @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập password ..." } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                     </div> <!-- form-group// -->
 
                     <div class="form-group">
@@ -35,10 +38,11 @@
                 </form>
             }
             @ViewBag.Fail
+
         </div> <!-- card-body.// -->
     </div> <!-- card .// -->
 
-    <p class="text-center mt-4">Bạn chưa có tài khoản? <a href="@Url.Action("Register", "Account")">Đăng ký</a></p>
+    <p class="text-center mt-4">Bạn chưa có tài khoản? <a href="@Url.Action("Register", "Account")"><strong>Đăng ký</strong></a></p>
     <br><br>
     <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
 

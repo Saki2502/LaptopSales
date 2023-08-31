@@ -1,6 +1,4 @@
 C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\obj\Debug\LaptopSales13.csproj.AssemblyReference.cache
-C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\obj\Debug\LaptopSales13.csproj.SuggestedBindingRedirects.cache
-C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\obj\Debug\LaptopSales13.dll.config
 C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\obj\Debug\LaptopSales13.csproj.CoreCompileInputs.cache
 C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\bin\LaptopSales13.dll.config
 C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\bin\LaptopSales13.dll
@@ -249,3 +247,5 @@ C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\bin\zh-Hant\Microsoft.
 C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\obj\Debug\LaptopSales13.csproj.CopyComplete
 C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\obj\Debug\LaptopSales13.dll
 C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\obj\Debug\LaptopSales13.pdb
+C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\bin\CrystalDecisions.CrystalReports.Engine.dll
+C:\Users\ADMIN\OneDrive\Desktop\LaptopSales\LaptopSales13\bin\CrystalDecisions.Shared.dll

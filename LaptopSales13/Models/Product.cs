@@ -37,12 +37,12 @@ namespace LaptopSales13.Models
         public string Weight { get; set; }
         public Nullable<int> BrandID { get; set; }
     
+        public virtual Brand Brand { get; set; }
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductTag> ProductTags { get; set; }
-        public virtual Brand Brand { get; set; }
     }
 }
