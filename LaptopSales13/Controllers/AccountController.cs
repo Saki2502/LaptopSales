@@ -13,7 +13,7 @@ namespace LaptopSales13.Controllers
 {
     public class AccountController : Controller
     {
-        PasokonEntities db = new PasokonEntities();
+        PasokonEntities1 db = new PasokonEntities1();
 
         // GET: User
         public ActionResult Index()

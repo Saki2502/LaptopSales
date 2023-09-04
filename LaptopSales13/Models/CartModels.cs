@@ -8,7 +8,7 @@ namespace LaptopSales13.Models
 {
     public class CartModels
     {
-        PasokonEntities db = new PasokonEntities();
+        PasokonEntities1 db = new PasokonEntities1();
 
         public Product Product { get; set; }
         //public int ProductID { get; set; }

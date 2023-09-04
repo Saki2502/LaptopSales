@@ -13,7 +13,7 @@ namespace LaptopSales13.Controllers
 {
     public class OrderController : Controller
     {
-        PasokonEntities db = new PasokonEntities();
+        PasokonEntities1 db = new PasokonEntities1();
 
         // GET: Order
         public ActionResult Index(int? page)

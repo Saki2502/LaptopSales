@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="PasokonModelStoreContainer" CdmEntityContainer="PasokonEntities">
+  <EntityContainerMapping StorageEntityContainer="PasokonModelStoreContainer" CdmEntityContainer="PasokonEntities1">
     <EntitySetMapping Name="Accounts">
       <EntityTypeMapping TypeName="PasokonModel.Account">
         <MappingFragment StoreEntitySet="Accounts">
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="AccountID" ColumnName="AccountID" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -134,7 +134,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="spCheckLogin" FunctionName="PasokonModel.Store.spCheckLogin" />
-    <FunctionImportMapping FunctionImportName="urUpdateSLSP" FunctionName="PasokonModel.Store.urUpdateSLSP" />
   </EntityContainerMapping>
 </Mapping>

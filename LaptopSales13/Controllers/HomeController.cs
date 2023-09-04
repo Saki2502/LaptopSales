@@ -9,7 +9,7 @@ namespace LaptopSales13.Controllers
 {
     public class HomeController : Controller
     {
-        PasokonEntities db = new PasokonEntities();
+        PasokonEntities1 db = new PasokonEntities1();
 
         public ActionResult Index()
         {

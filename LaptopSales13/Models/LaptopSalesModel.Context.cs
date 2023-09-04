@@ -12,13 +12,11 @@ namespace LaptopSales13.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
-    public partial class PasokonEntities : DbContext
+    public partial class PasokonEntities1 : DbContext
     {
-        public PasokonEntities()
-            : base("name=PasokonEntities")
+        public PasokonEntities1()
+            : base("name=PasokonEntities1")
         {
         }
     
@@ -39,23 +37,5 @@ namespace LaptopSales13.Models
         public virtual DbSet<ProductTag> ProductTags { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
-    
-        public virtual int spCheckLogin(string username, string password)
-        {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spCheckLogin", usernameParameter, passwordParameter);
-        }
-    
-        public virtual int urUpdateSLSP()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("urUpdateSLSP");
-        }
     }
 }

@@ -510,36 +510,39 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CustomerController.cs" />
-    <Compile Include="Models\Account.cs">
-      <DependentUpon>LaptopSalesModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
-    <Compile Include="Models\Brand.cs">
-      <DependentUpon>LaptopSalesModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Category.cs">
-      <DependentUpon>LaptopSalesModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Account.cs">
+      <DependentUpon>LaptopSalesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountModelView.cs" />
+    <Compile Include="Models\Brand.cs">
+      <DependentUpon>LaptopSalesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CartModels.cs" />
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>LaptopSalesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Customer.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Employee.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
+    <Compile Include="Models\HomeModels.cs" />
     <Compile Include="Models\Invoice.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
@@ -558,9 +561,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LaptopSalesModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModelView.cs" />
-    <Compile Include="Models\CartModels.cs" />
-    <Compile Include="Models\HomeModels.cs" />
     <Compile Include="Models\Order.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
@@ -573,14 +573,14 @@
     <Compile Include="Models\ProductTag.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Others\Util.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Supplier.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tag.cs">
       <DependentUpon>LaptopSalesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Others\Util.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\admin\dist\css\adminlte.css" />

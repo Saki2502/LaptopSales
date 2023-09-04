@@ -12,12 +12,26 @@ namespace LaptopSales13.Controllers
 {
     public class ProductController : Controller
     {
-        PasokonEntities db = new PasokonEntities();
+        PasokonEntities1 db = new PasokonEntities1();
 
         public ActionResult Index()
         {
             return View();
         }
+
+        //begin
+        public ActionResult Search(string keyword)
+        {
+            // Xử lý tìm kiếm ở đây dựa trên từ khoá "keyword"
+            // Ví dụ:
+            var searchResults = db.Products.Where(p => p.ProductName.Contains(keyword)).ToList();
+
+            // Sau khi xử lý xong, trả về view tương ứng hoặc dữ liệu kết quả tìm kiếm
+            return View(searchResults); // Trả về một view để hiển thị kết quả tìm kiếm
+        }
+
+        //end
+
 
         public PartialViewResult ProductListPartial(int? page, int? category, string sort, string fbrand, string fprice, string keyword)
         {

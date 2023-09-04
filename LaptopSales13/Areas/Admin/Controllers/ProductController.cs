@@ -10,7 +10,7 @@ namespace LaptopSales13.Areas.Admin.Controllers
 {
     public class ProductController : Controller
     {
-        PasokonEntities db = new PasokonEntities();
+        PasokonEntities1 db = new PasokonEntities1();
 
         // GET: Admin/Product
         public ActionResult Index(int? page)

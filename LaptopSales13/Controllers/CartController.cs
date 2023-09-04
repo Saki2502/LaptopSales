@@ -13,7 +13,7 @@ namespace LaptopSales13.Controllers
 {
     public class CartController : Controller
     {
-        PasokonEntities db = new PasokonEntities();
+        PasokonEntities1 db = new PasokonEntities1();
 
         // GET: Cart
         public ActionResult Index()
@@ -135,7 +135,8 @@ namespace LaptopSales13.Controllers
                         UnitPrice = decimal.Parse(cart.Product.Price.ToString())
                     };
                     db.OrderDetails.Add(orderDetail);
-                    db.urUpdateSLSP();
+                    //db.urUpdateSLSP();
+                    //TODO : con cac ?
                     db.SaveChanges();
                 }
                 //3. xóa giỏ hàng khỏi session

@@ -12,7 +12,7 @@ namespace LaptopSales13.Controllers
 {
     public class CategoryController : Controller
     {
-        PasokonEntities db = new PasokonEntities();
+        PasokonEntities1 db = new PasokonEntities1();
 
         // GET: Categories
         public ActionResult Index(int? page)

@@ -10,7 +10,7 @@ namespace LaptopSales13.Controllers
 {
     public class CustomerController : Controller
     {
-        PasokonEntities db = new PasokonEntities();
+        PasokonEntities1 db = new PasokonEntities1();
 
         // GET: Customer
         public ActionResult Index()
