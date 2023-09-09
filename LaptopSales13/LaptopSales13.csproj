@@ -2524,9 +2524,9 @@
     <Content Include="Content\images\banners\banner7.jpg" />
     <Content Include="Content\images\banners\banner8.jpg" />
     <Content Include="Content\images\banners\banner9.jpg" />
-    <Content Include="Content\images\banners\slide1.jpg" />
-    <Content Include="Content\images\banners\slide2.jpg" />
-    <Content Include="Content\images\banners\slide3.jpg" />
+    <Content Include="Content\images\banners\slide1.png" />
+    <Content Include="Content\images\banners\slide2.png" />
+    <Content Include="Content\images\banners\slide3.png" />
     <Content Include="Content\images\favicon.ico" />
     <Content Include="Content\images\fptshop.png" />
     <Content Include="Content\images\gearvn.png" />
@@ -2867,7 +2867,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Layout\_Index.cshtml" />
@@ -2887,6 +2886,7 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Customer\MyProfile.cshtml" />
     <Content Include="Views\Customer\EditProfile.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

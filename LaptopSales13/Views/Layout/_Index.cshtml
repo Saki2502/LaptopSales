@@ -58,20 +58,43 @@
                         </a> <!-- brand-wrap.// -->
                     </div>
                     <div class="col-xl-6 col-lg-5 col-md-6">
-                        <form action="/search" class="search-header" method="get">
-                            <div class="input-group w-100">
-                                @using (Html.BeginForm("Index", "Product", FormMethod.Get))
-                                {   
-                                    <input type="text" id="keyword" name="keyword" value="@ViewBag.keyword" class="form-control" placeholder="Nhập tên sản phẩm, từ khóa cần tìm">
+                        @*<form action="/search" class="search-header" method="get">
+                                    <div class="input-group w-100">
+                                        @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+                                        {
+                                            <input type="text" id="keyword" name="keyword" value="@ViewBag.keyword" class="form-control" placeholder="Nhập tên sản phẩm, từ khóa cần tìm">
 
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="submit">
+                                                    <i class="fa fa-search"></i> Search
+                                                </button>
+                                            </div>
+                                        }
+                                    </div>
+                                </form>
+                            <form action="Home/Index" class="search-header" method="get">
+                                <div class="input-group w-100">
+                                    <input type="text" name="keyword" value="@ViewBag.keyword" class="form-control" placeholder="Nhập tên sản phẩm, từ khóa cần tìm">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">
                                             <i class="fa fa-search"></i> Search
                                         </button>
                                     </div>
-                                }
+                                </div>
+                            </form>*@
+                        <form action="@Url.Action("Search", "Home")" class="search-header" method="get">
+                            <div class="input-group w-100">
+                                <input type="text" name="keyword" value="@ViewBag.keyword" class="form-control" placeholder="Nhập tên sản phẩm, từ khóa cần tìm">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-search"></i> Tìm
+                                    </button>
+                                </div>
                             </div>
-                        </form> <!-- search-wrap .end// -->
+                        </form>
+
+
+                        <!-- search-wrap .end// -->
                     </div> <!-- col.// -->
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="widgets-wrap float-md-right">
