@@ -1,0 +1,10 @@
+﻿@using LaptopSales13.Models
+@model List<Category>
+
+@{
+    foreach (var i in Model)
+    {
+        <a class="dropdown-item" href="@Url.Action("Index", "Product", new { page = 1, category = @i.CategoryID }, null)">@i.CategoryName</a>
+        @*@Html.ActionLink(@i.CategoryName, "Index", "Product", new { page = 1, category = @i.CategoryID }, null)*@
+    }
+}

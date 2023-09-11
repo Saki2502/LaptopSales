@@ -19,7 +19,7 @@ namespace LaptopSales13.Controllers
             return View();
         }
 
-        public PartialViewResult ProductListPartial(int? page, int? category, string sort, string fbrand, string fprice, string keyword)
+        public PartialViewResult ProductListPartial(int? page, int? category, string sort, string fbrand, string fprice)
         {
             List<string> brands = new List<string>();
             var brand = db.Products.Where(s => s.CategoryID == category).Select(s => new { s.Brand.BrandName });
@@ -45,18 +45,10 @@ namespace LaptopSales13.Controllers
                                 .Where(x => x.CategoryID == category)
                                 .ToPagedList(pageNumber, pageSize);
 
-                // Tìm sản phẩm theo tên sản phẩm                
-                if (!String.IsNullOrEmpty(keyword))
-                {
-                    ViewBag.keyword = keyword;
-                    productList = (PagedList<Product>)productList.Where(s => s.ProductName.Contains(keyword))
-                                                                 .ToPagedList(pageNumber, pageSize);
-                }
-
                 // Lọc product theo thương hiệu
                 if (fbrand != null)
                 {
-                    foreach (var i in ViewBag.BrandName)
+                    foreach (var i in brands)
                     {
                         if (fbrand == i)
                         {

@@ -1,0 +1,48 @@
+﻿@using LaptopSales13.Models
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/_Index.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            CategoryName
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
+                @using (Html.BeginForm("Delete", "Category", new { id = item.CategoryID }, FormMethod.Post, new { onsubmit = "return confirm ('Are you sure you want to delete this?');" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="submit" value="Delete" class="buttonLink" />
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="clear"></div>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+<div class="div-pagination">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+</div>
