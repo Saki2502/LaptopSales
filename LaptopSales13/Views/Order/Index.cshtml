@@ -54,7 +54,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Customer.LastName + ' ' + item.Customer.FirstName)
             </td>
             <td>
@@ -68,7 +68,7 @@
             </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.OrderID })
-            </td>
+            </td>*@
         </tr>
     }
 

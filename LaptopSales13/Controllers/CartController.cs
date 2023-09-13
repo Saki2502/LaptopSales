@@ -97,7 +97,7 @@ namespace LaptopSales13.Controllers
 
             if (u == null)
             {
-                return RedirectToAction("LogIn");
+                return RedirectToAction("LogIn","Account");
             }
             else
             {

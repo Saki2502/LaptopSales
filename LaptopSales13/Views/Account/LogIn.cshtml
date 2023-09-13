@@ -10,6 +10,36 @@
 
     <!-- ============================ COMPONENT LOGIN   ================================= -->
     <div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
+        @*<div class="card-body">
+                <h4 class="card-title mb-4">ĐĂNG NHẬP</h4>
+                @using (Html.BeginForm("LogIn", "Account", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <form>
+                        <a href="#" class="btn btn-facebook btn-block mb-2"> <i class="fab fa-facebook-f"></i> &nbsp  Sign in with Facebook</a>
+                        <a href="#" class="btn btn-google btn-block mb-4"> <i class="fab fa-google"></i> &nbsp  Sign in with Google</a>
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập username ..." } })
+                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        </div> <!-- form-group// -->
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập password ..." } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div> <!-- form-group// -->
+
+                        <div class="form-group">
+                            <a href="#" class="float-right">Quên mật khẩu?</a>
+                            <label class="float-left custom-control custom-checkbox"> <input type="checkbox" class="custom-control-input" checked=""> <div class="custom-control-label"> Remember </div> </label>
+                        </div> <!-- form-group form-check .// -->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block"> Đăng nhập  </button>
+                        </div> <!-- form-group// -->
+                    </form>
+                }
+                @ViewBag.Fail
+
+            </div> <!-- card-body.// -->*@
         <div class="card-body">
             <h4 class="card-title mb-4">ĐĂNG NHẬP</h4>
             @using (Html.BeginForm("LogIn", "Account", FormMethod.Post))
@@ -17,8 +47,6 @@
                 @Html.AntiForgeryToken()
 
                 <form>
-                    <a href="#" class="btn btn-facebook btn-block mb-2"> <i class="fab fa-facebook-f"></i> &nbsp  Sign in with Facebook</a>
-                    <a href="#" class="btn btn-google btn-block mb-4"> <i class="fab fa-google"></i> &nbsp  Sign in with Google</a>
                     <div class="form-group">
                         @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập username ..." } })
                         @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
@@ -37,9 +65,15 @@
                     </div> <!-- form-group// -->
                 </form>
             }
-            @ViewBag.Fail
 
+            @if (!string.IsNullOrEmpty(ViewBag.Fail))
+            {
+                <div class="alert alert-danger mt-3">
+                    @Html.Raw(ViewBag.Fail) <!-- Sử dụng Html.Raw để hiển thị mã HTML trong thông báo -->
+                </div>
+            }
         </div> <!-- card-body.// -->
+
     </div> <!-- card .// -->
 
     <p class="text-center mt-4">Bạn chưa có tài khoản? <a href="@Url.Action("Register", "Account")"><strong>Đăng ký</strong></a></p>
@@ -49,3 +83,40 @@
 
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
+<!-- Đặt mã JavaScript ở đây -->
+@*<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy tham chiếu đến form đăng nhập
+        const loginForm = document.querySelector("form[action='/Account/LogIn']");
+
+        // Bắt sự kiện submit của form
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault(); // Ngăn chặn việc gửi form mặc định
+
+            // Lấy giá trị của các trường nhập liệu
+            const username = document.querySelector("#Username").value;
+            const password = document.querySelector("#Password").value;
+
+            // Gửi dữ liệu đăng nhập đến server bằng AJAX
+            fetch("/Account/LogIn", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `Username=${username}&Password=${password}`
+            })
+                .then(response => {
+                    if (response.ok) {
+                        // Đăng nhập thành công, chuyển hướng người dùng đến trang chính tương ứng
+                        window.location.href = response.url;
+                    } else {
+                        // Đăng nhập thất bại, hiển thị thông báo
+                        alert("Đăng nhập thất bại. Vui lòng kiểm tra tên đăng nhập và mật khẩu.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Lỗi xử lý đăng nhập:", error);
+                });
+        });
+    });
+</script>*@
