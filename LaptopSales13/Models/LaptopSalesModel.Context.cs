@@ -57,5 +57,15 @@ namespace LaptopSales13.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("urUpdateSLSP");
         }
+    
+        public virtual int spOrderTotal(Nullable<int> orderID)
+        {
+            var orderIDParameter = orderID.HasValue ?
+                new ObjectParameter("OrderID", orderID) :
+                new ObjectParameter("OrderID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spOrderTotal", orderIDParameter);
+        }
+
     }
 }

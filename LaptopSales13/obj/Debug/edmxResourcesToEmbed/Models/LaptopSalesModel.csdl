@@ -7,14 +7,14 @@
     <Property Name="AccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Role" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_Accounts" FromRole="Accounts" ToRole="Customers" />
-    <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Accounts" FromRole="Accounts" ToRole="Employees" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Role" Type="Boolean" Nullable="false" />
     <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Account" FromRole="Accounts" ToRole="Customers" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Accounts" FromRole="Accounts" ToRole="Employees" />
   </EntityType>
   <EntityType Name="Brand">
     <Key>
@@ -37,20 +37,16 @@
       <PropertyRef Name="CustomerID" />
     </Key>
     <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="AccountID" Type="Int32" />
-    <NavigationProperty Name="Account" Relationship="Self.FK_Customers_Accounts" FromRole="Customers" ToRole="Accounts" />
-    <NavigationProperty Name="Orders" Relationship="Self.FK_Customers_Orders" FromRole="Customers" ToRole="Orders" />
-    <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoices_Customers" FromRole="Customers" ToRole="Invoices" />
+    <Property Name="AccountID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Account" FromRole="Customers" ToRole="Accounts" />
+    <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoices_Cutomers" FromRole="Customers" ToRole="Invoices" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Customers" FromRole="Customers" ToRole="Orders" />
   </EntityType>
   <EntityType Name="Employee">
     <Key>
       <PropertyRef Name="EmployeeID" />
     </Key>
     <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="LastName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="FirstName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="AccountID" Type="Int32" />
     <NavigationProperty Name="Account" Relationship="Self.FK_Employees_Accounts" FromRole="Employees" ToRole="Accounts" />
     <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Employees" FromRole="Employees" ToRole="Orders" />
@@ -64,7 +60,7 @@
     <Property Name="OrderID" Type="Int32" Nullable="false" />
     <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="TotalPrice" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
-    <NavigationProperty Name="Customer" Relationship="Self.FK_Invoices_Customers" FromRole="Invoices" ToRole="Customers" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Invoices_Cutomers" FromRole="Invoices" ToRole="Customers" />
     <NavigationProperty Name="Order" Relationship="Self.FK_Invoices_Orders" FromRole="Invoices" ToRole="Orders" />
   </EntityType>
   <EntityType Name="OrderDetail">
@@ -90,7 +86,7 @@
     <Property Name="CustomerID" Type="Int32" Nullable="false" />
     <Property Name="EmployeeID" Type="Int32" />
     <Property Name="PayType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Customer" Relationship="Self.FK_Customers_Orders" FromRole="Orders" ToRole="Customers" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Orders_Customers" FromRole="Orders" ToRole="Customers" />
     <NavigationProperty Name="Employee" Relationship="Self.FK_Orders_Employees" FromRole="Orders" ToRole="Employees" />
     <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoices_Orders" FromRole="Orders" ToRole="Invoices" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
@@ -148,8 +144,8 @@
     <Property Name="TagName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="ProductTags" Relationship="Self.FK_ProductTag_Tag" FromRole="Tag" ToRole="ProductTag" />
   </EntityType>
-  <Association Name="FK_Customers_Accounts">
-    <End Role="Accounts" Type="Self.Account" Multiplicity="0..1" />
+  <Association Name="FK_Account">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
     <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Accounts">
@@ -196,19 +192,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Customers_Orders">
-    <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
-    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customers">
-        <PropertyRef Name="CustomerID" />
-      </Principal>
-      <Dependent Role="Orders">
-        <PropertyRef Name="CustomerID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Invoices_Customers">
+  <Association Name="FK_Invoices_Cutomers">
     <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
     <End Role="Invoices" Type="Self.Invoice" Multiplicity="*" />
     <ReferentialConstraint>
@@ -216,6 +200,18 @@
         <PropertyRef Name="CustomerID" />
       </Principal>
       <Dependent Role="Invoices">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Customers">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Orders">
         <PropertyRef Name="CustomerID" />
       </Dependent>
     </ReferentialConstraint>
@@ -317,7 +313,7 @@
     <EntitySet Name="ProductTags" EntityType="Self.ProductTag" />
     <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
     <EntitySet Name="Tags" EntityType="Self.Tag" />
-    <AssociationSet Name="FK_Customers_Accounts" Association="Self.FK_Customers_Accounts">
+    <AssociationSet Name="FK_Account" Association="Self.FK_Account">
       <End Role="Accounts" EntitySet="Accounts" />
       <End Role="Customers" EntitySet="Customers" />
     </AssociationSet>
@@ -333,13 +329,13 @@
       <End Role="Categories" EntitySet="Categories" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK_Customers_Orders" Association="Self.FK_Customers_Orders">
-      <End Role="Customers" EntitySet="Customers" />
-      <End Role="Orders" EntitySet="Orders" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Invoices_Customers" Association="Self.FK_Invoices_Customers">
+    <AssociationSet Name="FK_Invoices_Cutomers" Association="Self.FK_Invoices_Cutomers">
       <End Role="Customers" EntitySet="Customers" />
       <End Role="Invoices" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Customers" Association="Self.FK_Orders_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
     <AssociationSet Name="FK_Orders_Employees" Association="Self.FK_Orders_Employees">
       <End Role="Employees" EntitySet="Employees" />
@@ -374,5 +370,11 @@
       <Parameter Name="password" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="urUpdateSLSP" />
+    <FunctionImport Name="spOrderTotal">
+      <Parameter Name="OrderID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="tinhTotalPrice" ReturnType="Collection(Int64)">
+      <Parameter Name="OrderID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>

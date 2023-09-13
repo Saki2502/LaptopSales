@@ -20,7 +20,9 @@ namespace LaptopSales13.Controllers
         {
             var pageNumber = page ?? 1;
             var pageSize = 5;
-            var orderList = db.Orders.OrderByDescending(x => x.OrderID).ToPagedList(pageNumber, pageSize);
+            var u = Session["use"] as LaptopSales13.Models.Account;
+            var orderList = db.Orders.Where(s => s.Customer.AccountID == u.AccountID).OrderBy(x => x.OrderID).ToPagedList(pageNumber, pageSize);
+
             return View(orderList);
         }
 
@@ -48,12 +50,36 @@ namespace LaptopSales13.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var order = db.Orders.Find(id);
+            ViewBag.Total = db.spOrderTotal(id.Value);
+
+            List<OrderDetail> order = db.OrderDetails.Where(s=>s.OrderID == id).ToList();
+            
             if (order == null)
             {
                 return HttpNotFound();
             }
             return View(order);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            
+            Order o = db.Orders.FirstOrDefault(s=>s.OrderID == id);
+            try
+            {
+                db.Orders.Remove(o);
+                db.SaveChanges();
+                return View("Index");
+            }
+            catch
+            {
+                return View();
+            }
+            
         }
     }
 }

@@ -9,10 +9,10 @@
     <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Email" Type="varchar" MaxLength="50" />
     <Property Name="Role" Type="bit" Nullable="false" />
-    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
     <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
-    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="250" />
     <Property Name="PhoneNumber" Type="varchar" MaxLength="15" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="Brands">
     <Key>
@@ -33,17 +33,13 @@
       <PropertyRef Name="CustomerID" />
     </Key>
     <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="AccountID" Type="int" />
+    <Property Name="AccountID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Employees">
     <Key>
       <PropertyRef Name="EmployeeID" />
     </Key>
     <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="LastName" Type="nvarchar" MaxLength="40" Nullable="false" />
-    <Property Name="FirstName" Type="nvarchar" MaxLength="40" Nullable="false" />
-    <Property Name="Address" Type="nvarchar" MaxLength="100" />
-    <Property Name="PhoneNumber" Type="varchar" MaxLength="15" />
     <Property Name="AccountID" Type="int" />
   </EntityType>
   <EntityType Name="Invoices">
@@ -122,15 +118,15 @@
     <Property Name="TagID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TagName" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
-  <Association Name="FK_Customers_Orders">
-    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
-    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+  <Association Name="FK_Account">
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Customers">
-        <PropertyRef Name="CustomerID" />
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountID" />
       </Principal>
-      <Dependent Role="Orders">
-        <PropertyRef Name="CustomerID" />
+      <Dependent Role="Customers">
+        <PropertyRef Name="AccountID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -146,7 +142,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Invoices_Customers">
+  <Association Name="FK_Invoices_Cutomers">
     <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
     <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
     <ReferentialConstraint>
@@ -191,6 +187,18 @@
       </Principal>
       <Dependent Role="OrderDetails">
         <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Customers">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="CustomerID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -270,6 +278,9 @@
     <Parameter Name="username" Type="varchar" Mode="In" />
     <Parameter Name="password" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="spOrderTotal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderID" Type="int" Mode="In" />
+  </Function>
   <Function Name="urUpdateSLSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="PasokonModelStoreContainer">
     <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
@@ -284,15 +295,15 @@
     <EntitySet Name="ProductTag" EntityType="Self.ProductTag" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Customers_Orders" Association="Self.FK_Customers_Orders">
+    <AssociationSet Name="FK_Account" Association="Self.FK_Account">
+      <End Role="Accounts" EntitySet="Accounts" />
       <End Role="Customers" EntitySet="Customers" />
-      <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
     <AssociationSet Name="FK_Employees_Accounts" Association="Self.FK_Employees_Accounts">
       <End Role="Accounts" EntitySet="Accounts" />
       <End Role="Employees" EntitySet="Employees" />
     </AssociationSet>
-    <AssociationSet Name="FK_Invoices_Customers" Association="Self.FK_Invoices_Customers">
+    <AssociationSet Name="FK_Invoices_Cutomers" Association="Self.FK_Invoices_Cutomers">
       <End Role="Customers" EntitySet="Customers" />
       <End Role="Invoices" EntitySet="Invoices" />
     </AssociationSet>
@@ -307,6 +318,10 @@
     <AssociationSet Name="FK_OrderDetails_Products" Association="Self.FK_OrderDetails_Products">
       <End Role="Products" EntitySet="Products" />
       <End Role="OrderDetails" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Customers" Association="Self.FK_Orders_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
     <AssociationSet Name="FK_Orders_Employees" Association="Self.FK_Orders_Employees">
       <End Role="Employees" EntitySet="Employees" />

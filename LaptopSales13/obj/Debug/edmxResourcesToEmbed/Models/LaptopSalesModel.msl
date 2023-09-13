@@ -4,15 +4,15 @@
     <EntitySetMapping Name="Accounts">
       <EntityTypeMapping TypeName="PasokonModel.Account">
         <MappingFragment StoreEntitySet="Accounts">
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="AccountID" ColumnName="AccountID" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -44,10 +44,6 @@
       <EntityTypeMapping TypeName="PasokonModel.Employee">
         <MappingFragment StoreEntitySet="Employees">
           <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
           <ScalarProperty Name="AccountID" ColumnName="AccountID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -136,5 +132,7 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="spCheckLogin" FunctionName="PasokonModel.Store.spCheckLogin" />
     <FunctionImportMapping FunctionImportName="urUpdateSLSP" FunctionName="PasokonModel.Store.urUpdateSLSP" />
+    <FunctionImportMapping FunctionImportName="spOrderTotal" FunctionName="PasokonModel.Store.spOrderTotal" />
+    <FunctionImportMapping FunctionImportName="tinhTotalPrice" FunctionName="PasokonModel.Store.spOrderTotal" />
   </EntityContainerMapping>
 </Mapping>

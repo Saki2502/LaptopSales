@@ -20,7 +20,7 @@ namespace LaptopSales13.Controllers
         {
             return View();
         }
-        
+
         private int IsExistingCheck(int? id)
         {
             List<CartModels> listCart = Session["Cart"] as List<CartModels>;
@@ -59,7 +59,7 @@ namespace LaptopSales13.Controllers
             return View("Index");
         }
 
-        
+
 
         public ActionResult Delete(int? id)
         {
@@ -87,6 +87,7 @@ namespace LaptopSales13.Controllers
 
         public ActionResult Checkout()
         {
+
             return View("Checkout");
         }
 
@@ -94,54 +95,55 @@ namespace LaptopSales13.Controllers
         {
             List<CartModels> listCart = (List<CartModels>)Session["Cart"];
             var u = Session["use"] as LaptopSales13.Models.Account;
-
-            if (u == null)
+            Account a = db.Accounts.FirstOrDefault(s => s.AccountID == u.AccountID);
+            a.FirstName = frc["firstName"];
+            a.LastName = frc["lastName"];
+            a.PhoneNumber = frc["phone"];
+            a.Address = frc["address"];
+            db.SaveChanges();
+            if (db.Customers.FirstOrDefault(s => s.AccountID == u.AccountID) == null)
             {
-                return RedirectToAction("LogIn");
-            }
-            else
-            {
-
-                u.FirstName = frc["firstName"];
-                u.LastName = frc["lastName"];
-                u.PhoneNumber = frc["phone"];
-                u.Address = frc["address"];
                 var customer = new LaptopSales13.Models.Customer()
                 {
                     AccountID = u.AccountID
                 };
                 db.Customers.Add(customer);
                 db.SaveChanges();
+            }
 
-                //1. Lưu thông tin vào bảng Orders
-                var order = new LaptopSales13.Models.Order()
+
+            //1. Lưu thông tin vào bảng Orders
+            //ViewBag.Paytype = "";
+            int cus = db.Customers.FirstOrDefault(s => s.AccountID == u.AccountID).CustomerID;
+            var order = new LaptopSales13.Models.Order()
+            {
+                CustomerID = cus,
+                OrderDate = DateTime.Now,
+
+                PayType = "Cash",
+                Status = "Chờ xác nhận"
+            };
+            db.Orders.Add(order);
+            db.SaveChanges();
+
+            //2. Lưu thông tin vào bảng Order Details
+            foreach (CartModels cart in listCart)
+            {
+                OrderDetail orderDetail = new OrderDetail()
                 {
-                    CustomerID = customer.CustomerID,
-                    OrderDate = DateTime.Now,
-                    PayType = frc[""],
-                    Status = "Chờ xác nhận"
+                    OrderID = order.OrderID,
+                    ProductID = cart.Product.ProductID,
+                    Quantity = short.Parse(cart.Quantity.ToString()),
+                    UnitPrice = decimal.Parse(cart.Product.Price.ToString())
                 };
-                db.Orders.Add(order);
+                db.OrderDetails.Add(orderDetail);
+                //db.urUpdateSLSP();
                 db.SaveChanges();
+            }
+            //3. xóa giỏ hàng khỏi session
+            Session.Remove("Cart");
+            return View("OrderSuccess");
 
-                //2. Lưu thông tin vào bảng Order Details
-                foreach (CartModels cart in listCart)
-                {
-                    OrderDetail orderDetail = new OrderDetail()
-                    {
-                        OrderID = order.OrderID,
-                        ProductID = cart.Product.ProductID,
-                        Quantity = short.Parse(cart.Quantity.ToString()),
-                        UnitPrice = decimal.Parse(cart.Product.Price.ToString())
-                    };
-                    db.OrderDetails.Add(orderDetail);
-                    //db.urUpdateSLSP();
-                    db.SaveChanges();
-                }
-                //3. xóa giỏ hàng khỏi session
-                Session.Remove("Cart");
-                return View("OrderSuccess");
-            }  
-        }        
+        }
     }
 }

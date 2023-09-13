@@ -21,10 +21,6 @@ namespace LaptopSales13.Models
         }
     
         public int EmployeeID { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public string Address { get; set; }
-        public string PhoneNumber { get; set; }
         public Nullable<int> AccountID { get; set; }
     
         public virtual Account Account { get; set; }
