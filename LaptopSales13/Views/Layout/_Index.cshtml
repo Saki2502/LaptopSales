@@ -58,18 +58,14 @@
                         </a> <!-- brand-wrap.// -->
                     </div>
                     <div class="col-xl-6 col-lg-5 col-md-6">
-                        <form action="/search" class="search-header" method="get">
+                        <form action="@Url.Action("Search", "Home")" class="search-header" method="get">
                             <div class="input-group w-100">
-                                @using (Html.BeginForm("Index", "Product", FormMethod.Get))
-                                {   
-                                    <input type="text" id="keyword" name="keyword" value="@ViewBag.keyword" class="form-control" placeholder="Nhập tên sản phẩm, từ khóa cần tìm">
-
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit">
-                                            <i class="fa fa-search"></i> Search
-                                        </button>
-                                    </div>
-                                }
+                                <input type="text" name="keyword" value="@ViewBag.keyword" class="form-control" placeholder="Nhập tên sản phẩm, từ khóa cần tìm">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-search"></i> Tìm
+                                    </button>
+                                </div>
                             </div>
                         </form> <!-- search-wrap .end// -->
                     </div> <!-- col.// -->
@@ -79,7 +75,7 @@
                                 if (u != null)
                                 {
                                     <div class="widget-header mr-3 dropdown">
-                                        <a href="#" class="widget-view" data-toggle="dropdown" aria-expanded="false">
+                                        <a href="/Customer/MyProfile" class="widget-view" data-toggle="dropdown" aria-expanded="false">
                                             <div class="icon-area">
                                                 <i class="fa fa-user"></i>
                                                 @*<span class="notify">3</span>*@
@@ -94,8 +90,7 @@
 
                                             <a class="dropdown-item" href="/Account/LogOut">Đăng xuất</a>
                                         </div>
-                                        @*@Html.ActionLink("ĐĂNG XUẤT", "DangXuat", "User", new { style = "color:red" })*@
-                                        @*<a style="color:red" href="/Account/LogOut"> ĐĂNG XUẤT</a>*@
+                                        
                                     </div>
                                 }
                                 else
@@ -121,14 +116,14 @@
                                     <small class="text"> Tin nhắn </small>
                                 </a>
                             </div>*@
-                            <div class="widget-header mr-3">
-                                <a href="#" class="widget-view">
+                            @*<div class="widget-header mr-3">
+                                <a href="/Order/Index" class="widget-view">
                                     <div class="icon-area">
                                         <i class="fa fa-store"></i>
                                     </div>
                                     <small class="text"> Đơn hàng </small>
                                 </a>
-                            </div>
+                            </div>*@
                             <div class="widget-header">
                                 <a href="@Url.Action("Index", "Cart")" class="widget-view">
                                     <div class="icon-area">

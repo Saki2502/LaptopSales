@@ -271,45 +271,38 @@
                                 </li>
                             </ul>
                         </li>
+                                                
+                        <li class="nav-header">QUẢN TRỊ</li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tree"></i>
+                            <a href="@Url.Action("Index", "Product")" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
                                 <p>
-                                    UI Elements
-                                </p>
-                            </a>                            
-                        </li>                        
-                        <li class="nav-header">EXAMPLES</li>
-                        <li class="nav-item">
-                            <a href="pages/calendar.html" class="nav-link">
-                                <i class="nav-icon far fa-calendar-alt"></i>
-                                <p>
-                                    Calendar
-                                    <span class="badge badge-info right">2</span>
+                                    Quản lý sản phẩm
+                                    @*<span class="badge badge-info right">2</span>*@
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/gallery.html" class="nav-link">
-                                <i class="nav-icon far fa-image"></i>
+                            <a href="@Url.Action("Index", "User")" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
                                 <p>
-                                    Gallery
+                                    Quản lý người dùng
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-envelope"></i>
+                                <i class="nav-icon fas fa-book"></i>
                                 <p>
-                                    Mailbox
-                                    <i class="fas fa-angle-left right"></i>
+                                    Quản lý đơn hàng
+                                    @*<i class="fas fa-angle-left right"></i>*@
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
+                            @*<ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="pages/mailbox/mailbox.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Inbox</p>
+                                        <p>Xem thông tin đơn hàng</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -324,8 +317,26 @@
                                         <p>Read</p>
                                     </a>
                                 </li>
-                            </ul>
+                            </ul>*@
                         </li>
+                        <li class="nav-item">
+                            <a href="pages/gallery.html" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Quản lý nhà cung cấp
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/gallery.html" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Quản lý thương hiệu
+                                </p>
+                            </a>
+                        </li>
+                        
+                        
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-book"></i>

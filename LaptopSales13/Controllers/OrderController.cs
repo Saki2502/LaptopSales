@@ -50,7 +50,9 @@ namespace LaptopSales13.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.Total = db.spOrderTotal(id.Value);
+             
+            int tam = (int)db.spOrderTotal(5).FirstOrDefault().Value;
+            ViewBag.Total = tam;
 
             List<OrderDetail> order = db.OrderDetails.Where(s=>s.OrderID == id).ToList();
             

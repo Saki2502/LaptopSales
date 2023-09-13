@@ -17,7 +17,7 @@ namespace LaptopSales13.Areas.Admin.Controllers
         {
             if (page == null) page = 1;
 
-            var sp = db.Products.OrderBy(x => x.ProductID);
+            var sp = db.Products.OrderByDescending(x => x.ProductID);
 
             // Tạo kích thước trang (pageSize) hay là số sản phẩm hiển thị trên 1 trang
             int pageSize = 5;

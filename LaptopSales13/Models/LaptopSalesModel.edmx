@@ -727,11 +727,11 @@
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="urUpdateSLSP" />
-          <FunctionImport Name="spOrderTotal">
-            <Parameter Name="OrderID" Mode="In" Type="Int32" />
+          <FunctionImport Name="spOrderTotal" ReturnType="Collection(Int64)">
+          <Parameter Name="OrderID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="tinhTotalPrice" ReturnType="Collection(Int64)">
-            <Parameter Name="OrderID" Mode="In" Type="Int32" />
+          <Parameter Name="OrderID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
