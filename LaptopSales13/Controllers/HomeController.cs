@@ -14,7 +14,6 @@ namespace LaptopSales13.Controllers
 
         public ActionResult Index()
         {
-
             HomeModels model = new HomeModels();
             model.ListCategory = db.Categories.ToList();
             model.ListProduct = db.Products.ToList();
