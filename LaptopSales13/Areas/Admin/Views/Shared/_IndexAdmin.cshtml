@@ -26,6 +26,11 @@
     <!-- summernote -->
     <link rel="stylesheet" href="~/Content/admin/plugins/summernote/summernote-bs4.min.css">
 
+    <!-- custom style -->
+    <link href="~/Content/css/ui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/admin/dist/css/Style.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -47,16 +52,16 @@
                     <a href="@Url.Action("Index", "Home")" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="@Url.Action("Index", "Product")" class="nav-link">Quản lý sản phẩm</a>
+                    <a href="@Url.Action("Index", "Product")" class="nav-link">Sản phẩm</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Quản lý người dùng</a>
+                    <a href="@Url.Action("Index", "User")" class="nav-link">Người dùng</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Quản lý nhà cung cấp</a>
+                    <a href="@Url.Action("Index", "Order")" class="nav-link">Đơn hàng</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Quản lý thương hiệu</a>
+                    <a href="#" class="nav-link">Thống kê</a>
                 </li>
             </ul>
 
@@ -186,9 +191,9 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             @*<a href="index3.html" class="brand-link">
-                <img src="~/Content/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Pasokon</span>
-            </a>*@
+                    <img src="~/Content/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <span class="brand-text font-weight-light">Pasokon</span>
+                </a>*@
 
             <!-- Sidebar -->
             <div class="sidebar">
@@ -223,11 +228,11 @@
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Dashboard
+                                    Thống kê
                                 </p>
-                            </a>                            
+                            </a>
                         </li>
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a href="pages/widgets.html" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
@@ -235,7 +240,7 @@
                                     <span class="right badge badge-danger">New</span>
                                 </p>
                             </a>
-                        </li>                        
+                        </li>*@
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-chart-pie"></i>
@@ -271,7 +276,7 @@
                                 </li>
                             </ul>
                         </li>
-                                                
+
                         <li class="nav-header">QUẢN TRỊ</li>
                         <li class="nav-item">
                             <a href="@Url.Action("Index", "Product")" class="nav-link">
@@ -291,7 +296,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="@Url.Action("Index", "Order")" class="nav-link">
                                 <i class="nav-icon fas fa-book"></i>
                                 <p>
                                     Quản lý đơn hàng
@@ -299,45 +304,28 @@
                                 </p>
                             </a>
                             @*<ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/mailbox/mailbox.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Xem thông tin đơn hàng</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/mailbox/compose.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Compose</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/mailbox/read-mail.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Read</p>
-                                    </a>
-                                </li>
-                            </ul>*@
+                                    <li class="nav-item">
+                                        <a href="pages/mailbox/mailbox.html" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Xem thông tin đơn hàng</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="pages/mailbox/compose.html" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Compose</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="pages/mailbox/read-mail.html" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Read</p>
+                                        </a>
+                                    </li>
+                                </ul>*@
                         </li>
-                        <li class="nav-item">
-                            <a href="pages/gallery.html" class="nav-link">
-                                <i class="nav-icon fas fa-book"></i>
-                                <p>
-                                    Quản lý nhà cung cấp
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/gallery.html" class="nav-link">
-                                <i class="nav-icon fas fa-book"></i>
-                                <p>
-                                    Quản lý thương hiệu
-                                </p>
-                            </a>
-                        </li>
-                        
-                        
-                        <li class="nav-item">
+
+                        @*<li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-book"></i>
                                 <p>
@@ -384,8 +372,8 @@
                                 <p>
                                     Extras
                                 </p>
-                            </a>                            
-                        </li>                        
+                            </a>
+                        </li>*@
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -416,7 +404,7 @@
     <script src="~/Content/admin/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-  $.widget.bridge('uibutton', $.ui.button)
+        $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src="~/Content/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

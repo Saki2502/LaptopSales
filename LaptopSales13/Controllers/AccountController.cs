@@ -8,6 +8,8 @@ using Scrypt;
 using System.Security.Cryptography;
 using System.Text;
 using LaptopSales13.Others;
+using System.Data.Entity.Core.Objects;
+using System.Data.SqlClient;
 
 namespace LaptopSales13.Controllers
 {
@@ -46,6 +48,7 @@ namespace LaptopSales13.Controllers
                     account.UserName = r.Username;
                     account.Password = Util.GetMD5(r.Password);
                     account.Email = r.Email;
+                    account.Role = "customer";
                     db.Configuration.ValidateOnSaveEnabled = false;
                     // Thêm người dùng  mới
                     db.Accounts.Add(account);
@@ -74,6 +77,7 @@ namespace LaptopSales13.Controllers
             {
                 string userName = l.Username.ToString();
                 var password = GetMD5(l.Password);
+
                 var islogin = db.Accounts.SingleOrDefault(x => x.UserName.Equals(userName) && x.Password.Equals(password));
 
                 if (islogin != null)
@@ -92,8 +96,11 @@ namespace LaptopSales13.Controllers
                 }
                 else
                 {
+                    //int result = db.spCheckLogin(username: userName, password: password);
+
+
                     ViewBag.Fail = "Đăng nhập thất bại";
-                    return RedirectToAction("LogIn");
+                    //return RedirectToAction("LogIn");
                 }
             }
             return View();

@@ -131,8 +131,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="spCheckLogin" FunctionName="PasokonModel.Store.spCheckLogin" />
-    <FunctionImportMapping FunctionImportName="urUpdateSLSP" FunctionName="PasokonModel.Store.urUpdateSLSP" />
     <FunctionImportMapping FunctionImportName="spOrderTotal" FunctionName="PasokonModel.Store.spOrderTotal" />
-    <FunctionImportMapping FunctionImportName="tinhTotalPrice" FunctionName="PasokonModel.Store.spOrderTotal" />
+    <FunctionImportMapping FunctionImportName="urUpdateSLSP" FunctionName="PasokonModel.Store.urUpdateSLSP" />
   </EntityContainerMapping>
 </Mapping>

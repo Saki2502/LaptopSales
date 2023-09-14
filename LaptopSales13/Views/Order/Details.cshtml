@@ -22,7 +22,7 @@
                 <div class="card" style="border-radius: 10px;">
                     <div class="card-header px-4 py-5">
                         <h3 class="text-muted mb-2">Chi tiết đơn hàng</h3>
-                        @Html.ActionLink("Xuất hóa đơn", "ExportOrderListing")
+                        @*@Html.ActionLink("Xuất hóa đơn", "ExportOrderListing")*@
 
                     </div>
                     <div class="card-body p-4">
@@ -79,7 +79,7 @@
                     <div class="card-footer border-0 px-4 py-5"
                          style="background-color: #a8729a; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
                         <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
-                            Tổng tiền: <span class="h2 mb-0 ms-2">@(String.Format("{0:N0}", ViewBag.Total))&#8363;</span>
+                            Tổng tiền: @*<span class="h2 mb-0 ms-2">@(String.Format("{0:N0}", ViewBag.Total))*@&#8363;</span>
                         </h5>
                     </div>
                 </div>

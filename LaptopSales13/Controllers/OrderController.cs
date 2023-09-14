@@ -27,21 +27,21 @@ namespace LaptopSales13.Controllers
         }
 
         // Export PDf Invoice
-        public ActionResult ExportOrderListing()
-        {
-            ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("~/Reports/OrderListing.rpt")));
-            rd.SetDataSource(db.Orders.ToList());
+        //public ActionResult ExportOrderListing()
+        //{
+        //    ReportDocument rd = new ReportDocument();
+        //    rd.Load(Path.Combine(Server.MapPath("~/Reports/OrderListing.rpt")));
+        //    rd.SetDataSource(db.Orders.ToList());
 
-            Response.Buffer = false;
-            Response.ClearContent();
-            Response.ClearHeaders();
+        //    Response.Buffer = false;
+        //    Response.ClearContent();
+        //    Response.ClearHeaders();
 
-            Stream str = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-            str.Seek(0, SeekOrigin.Begin);
-            string savedFilename = string.Format("OrderListing_{0}.pdf", DateTime.Now);
-            return File(str, "application/pdf", savedFilename);
-        }
+        //    Stream str = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+        //    str.Seek(0, SeekOrigin.Begin);
+        //    string savedFilename = string.Format("OrderListing_{0}.pdf", DateTime.Now);
+        //    return File(str, "application/pdf", savedFilename);
+        //}
 
         // GET: Order/Details/5
         public ActionResult Details(int? id)
@@ -51,8 +51,8 @@ namespace LaptopSales13.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
              
-            int tam = (int)db.spOrderTotal(5).FirstOrDefault().Value;
-            ViewBag.Total = tam;
+            //int tam = (int)db.spOrderTotal(5).FirstOrDefault().Value;
+            //ViewBag.Total = tam;
 
             List<OrderDetail> order = db.OrderDetails.Where(s=>s.OrderID == id).ToList();
             

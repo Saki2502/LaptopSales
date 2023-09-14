@@ -5,3 +5,11 @@
 .content .pagination li {
     padding-right: 10px;
 }
+
+body.sidebar-mini.layout-fixed {
+    width: min-content!important;
+}
+
+body.sidebar-mini.layout-fixed.sidebar-collapse {
+    width: auto;
+}

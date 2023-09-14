@@ -66,7 +66,7 @@
                                     <h6 class="card-title">@item.CategoryName</h6>
                                     <a href="#" class="btn btn-secondary btn-sm"> Mua Ngay </a>
                                 </div>
-                                <img src="~/Content/images/items/1.jpg" height="80" class="img-bg">
+                                <img src="https://logodix.com/logo/1280688.png" height="80" class="img-bg">
                             </div>
                         }
 
@@ -85,14 +85,40 @@
         <div class="col-heading content-body">
             <header class="section-heading">
                 <h3 class="section-title">GIẢM GIÁ SỐC</h3>
-                <p>Hygiene equipments</p>
+                <p>Thời gian có hạn</p>
             </header><!-- sect-heading -->
             <div class="timer">
-                <div> <span class="num">04</span> <small>Days</small></div>
-                <div> <span class="num">12</span> <small>Hours</small></div>
-                <div> <span class="num">58</span> <small>Min</small></div>
-                <div> <span class="num">02</span> <small>Sec</small></div>
+                <div> <span class="num">04</span> <small>Ngày</small></div>
+                <div> <span class="num">12</span> <small>Giờ</small></div>
+                <div> <span class="num">58</span> <small>Phút</small></div>
+                <div> <span class="num">02</span> <small>Giây</small></div>
             </div>
+            <script>
+                // Đặt thời gian mà bạn muốn đếm ngược tới
+                var countDownDate = new Date("Sep 23, 2023 23:59:59").getTime();
+                // Cập nhật đồng hồ đếm ngược sau mỗi 1 giây
+                var countdownfunction = setInterval(function () {
+                    // Lấy thời gian hiện tại
+                    var now = new Date().getTime();
+                    // Tìm ra khoảng cách giữa bây giờ và thời gian đếm ngược
+                    var distance = countDownDate - now;
+                    // Tính toán số ngày, giờ, phút và giây còn lại
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    // Hiển thị kết quả trong các phần tử HTML với class="num"
+                    document.querySelectorAll('.timer .num')[0].innerText = days;
+                    document.querySelectorAll('.timer .num')[1].innerText = hours;
+                    document.querySelectorAll('.timer .num')[2].innerText = minutes;
+                    document.querySelectorAll('.timer .num')[3].innerText = seconds;
+                    // Nếu đồng hồ đếm ngược kết thúc, hiển thị một thông báo
+                    if (distance < 0) {
+                        clearInterval(countdownfunction);
+                        document.querySelector(".timer").innerHTML = "Đã hết giờ!";
+                    }
+                }, 1000);
+            </script>
         </div> <!-- col.// -->
         <div class="row no-gutters items-wrap">
             @foreach (var item in Model.ListProduct.Take(5))
@@ -266,7 +292,6 @@
 
 
 <!-- =============== SECTION 1 END =============== -->
-
 <!-- =============== SECTION ITEMS =============== -->
 <section class="padding-bottom-sm">
 
@@ -306,7 +331,7 @@
                     <p class="small text-uppercase text-muted">Order protection</p>
                 </div>
             </article>-->
- <!-- card.// -->
+<!-- card.// -->
 <!--</div>--> <!-- col.// -->
 <!--<div class="col-md-3 col-sm-6">
     <article class="card card-post">
@@ -316,7 +341,7 @@
             <p class="small text-uppercase text-muted">Finance solution</p>
         </div>
     </article>-->
- <!-- card.// -->
+<!-- card.// -->
 <!--</div>--> <!-- col.// -->
 <!--<div class="col-md-3 col-sm-6">
     <article class="card card-post">
@@ -326,7 +351,7 @@
             <p class="small text-uppercase text-muted">Easy Inspection</p>
         </div>
     </article>-->
- <!-- card.// -->
+<!-- card.// -->
 <!--</div>--> <!-- col.// -->
 <!--<div class="col-md-3 col-sm-6">
     <article class="card card-post">
@@ -336,31 +361,18 @@
             <p class="small text-uppercase text-muted">Logistic services</p>
         </div>
     </article>-->
- <!-- card.// -->
+<!-- card.// -->
 <!--</div>--> <!-- col.// -->
 <!--</div>--> <!-- row.// -->
 <!--</section>-->
 <!-- =============== SECTION SERVICES .//END =============== -->
-<!-- =============== SECTION REGION =============== -->
-<!--<section class="padding-bottom">
+<!-- =============== SECTION map =============== -->
+<section class="padding-bottom-sm">
+    <center>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9306899560165!2d106.67599247601291!3d10.816616158449133!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528e195f816b7%3A0xfb5c0101490d8870!2zMzcxIE5ndXnhu4VuIEtp4buHbSwgUGjGsOG7nW5nIDMsIEfDsiBW4bqlcCwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oIDcwMDAwLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1694606526181!5m2!1svi!2s" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </center>
+</section>
 
-    <header class="section-heading heading-line">
-        <h4 class="title-section text-uppercase">Choose region</h4>
-    </header>
-
-    <ul class="row mt-4">
-        <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/CN.png"> <span>China</span> </a></li>
-        <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/DE.png"> <span>Germany</span> </a></li>
-        <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/AU.png"> <span>Australia</span> </a></li>
-        <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/RU.png"> <span>Russia</span> </a></li>
-        <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/IN.png"> <span>India</span> </a></li>
-        <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/GB.png"> <span>England</span> </a></li>
-        <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/TR.png"> <span>Turkey</span> </a></li>
-        <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/UZ.png"> <span>Uzbekistan</span> </a></li>
-        <li class="col-md col-6"><a href="#" class="icontext"> <i class="mr-3 fa fa-ellipsis-h"></i> <span>More regions</span> </a></li>
-    </ul>
-</section>-->
-<!-- =============== SECTION REGION .//END =============== -->
 
 <article class="my-4">
     <img src="~/Content/images/banners/ad-sm.png" class="w-100">

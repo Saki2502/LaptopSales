@@ -1,0 +1,83 @@
+﻿@model List<LaptopSales13.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_IndexAdmin.cshtml";
+}
+
+<section class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Chi tiết đơn hàng</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Order")">Order</a></li>
+                        <li class="breadcrumb-item active">@ViewBag.OrderID</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <main class="col-md-12">
+                    <div class="card">
+
+                        <table class="table table-borderless table-shopping-i">
+                            <thead class="text-muted">
+                                <tr class="small text-uppercase">
+                                    <th scope="col" class="col-md-8">Product</th>
+                                    <th scope="col" class="col-md-2">Quantity</th>
+                                    <th scope="col" class="col-md-2">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var i in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <figure class="itemside">
+                                                <div class="aside"><img src="@Url.Content(i.Product.ImageURL)" style="width: 180px"></div>
+                                                <figcaption class="info">
+                                                    <a href="@Url.Action("Details", "Product", new { id = i.Product.ProductID})" class="title text-dark">@i.Product.ProductName</a>
+                                                    <div class="text-muted">
+                                                        @if (i.Product.CPU != null && i.Product.VGA != null)
+                                                        {
+                                                            <p class="small">CPU: @i.Product.CPU, VGA: @i.Product.VGA</p>
+                                                        }
+
+                                                        <p class="small">Brand: @i.Product.Brand.BrandName</p>
+                                                    </div>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="quantity" readonly id="quantity" value="@i.Quantity" class="w-50" />
+                                        </td>
+                                        <td>
+                                            <div class="price-wrap">
+                                                <var class="price" style="display: block;">@(String.Format("{0:N0}", (i.Product.Price*i.Quantity)))&#8363;</var>
+                                                <small class="text-muted"> @(String.Format("{0:N0}", i.Product.Price))&#8363; / 1 món </small>
+                                            </div> <!-- price-wrap .// -->
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div> <!-- card.// -->
+                </main> <!-- col.// -->
+            </div>
+        </div>
+        <p>
+            @*@Html.ActionLink("Edit", "Edit", new { id = Model.OrderID }) |*@
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </section>
+</section>

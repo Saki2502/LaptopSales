@@ -53,27 +53,18 @@ namespace LaptopSales13.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spCheckLogin", usernameParameter, passwordParameter);
         }
     
+        public virtual int spOrderTotal(Nullable<int> orderID)
+        {
+            var orderIDParameter = orderID.HasValue ?
+                new ObjectParameter("OrderID", orderID) :
+                new ObjectParameter("OrderID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spOrderTotal", orderIDParameter);
+        }
+    
         public virtual int urUpdateSLSP()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("urUpdateSLSP");
-        }
-    
-        public virtual ObjectResult<Nullable<long>> spOrderTotal(Nullable<int> orderID)
-        {
-            var orderIDParameter = orderID.HasValue ?
-                new ObjectParameter("OrderID", orderID) :
-                new ObjectParameter("OrderID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("spOrderTotal", orderIDParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<long>> tinhTotalPrice(Nullable<int> orderID)
-        {
-            var orderIDParameter = orderID.HasValue ?
-                new ObjectParameter("OrderID", orderID) :
-                new ObjectParameter("OrderID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("tinhTotalPrice", orderIDParameter);
         }
     }
 }
