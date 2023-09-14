@@ -2961,6 +2961,7 @@
     <Folder Include="Areas\Admin\Views\Brand\" />
     <Folder Include="obj\" />
     <Folder Include="Reports\" />
+    <Folder Include="Views\Momo\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

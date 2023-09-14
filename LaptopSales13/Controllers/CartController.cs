@@ -111,6 +111,9 @@ namespace LaptopSales13.Controllers
                 db.SaveChanges();
             }
 
+            // Lấy giá trị từ radio button
+            string paymentMethod = frc["flexRadioDefaultPayment"];
+               
 
             //1. Lưu thông tin vào bảng Orders
             //ViewBag.Paytype = "";

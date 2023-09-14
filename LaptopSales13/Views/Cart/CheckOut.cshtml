@@ -21,6 +21,7 @@
 
 @using (Html.BeginForm("ProcessOrder", "Cart", FormMethod.Post, new { id = "customer-form" }))
 {
+    <input type="hidden" id="momoSelected" name="momoSelected" value="false" />
     <section class="section-content padding-y">
         <div class="container">
             @if (u != null)
@@ -133,8 +134,8 @@
                                         <div class="form-check h-100 border rounded-3">
                                             <div class="p-3">
                                                 <div class="p-3">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault3" checked />
-                                                    <label class="form-check-label" for="flexRadioDefault3">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefaultPayment" id="cash" checked />
+                                                    <label class="form-check-label" for="cash">
                                                         Cash <br />
                                                     </label>
                                                 </div>
@@ -146,8 +147,8 @@
                                         <div class="form-check h-100 border rounded-3">
                                             <div class="p-3">
                                                 <div class="p-3">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault4" />
-                                                    <label class="form-check-label" for="flexRadioDefault4">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefaultPayment" id="momo" />
+                                                    <label class="form-check-label" for="momo">
                                                         Momo
                                                         <br />
                                                     </label>
@@ -208,6 +209,20 @@
                                         </div>
 
                                         <hr />
+
+                                        <h6 class="text-dark my-4">QR MOMO</h6>
+                                        <p class="mb-2">Quý khách khi đặt hàng vui lòng tick chọn MOMO ở phần phương thức thanh toán</p>
+                                        var sum = totalPrice.Replace(",", "");
+                                        var time = DateTime.Now;
+                                        var text = "Thanh toan pasokon";
+
+                                        // Nối các giá trị thành một chuỗi URL
+                                        var qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=" + "2|99|0968710856|0968710856||0|0|" + sum + "|" + text + "%20Total%20Amount:%20" + sum + "%20Time:%20" + time.ToString("yyyy-MM-dd HH:mm:ss") + "|transfer_myqr";
+                                        <!-- Sử dụng chuỗi URL đã nối trong thẻ <img> -->
+                                        <img src="@qrCodeUrl" alt="Alternate Text" />
+
+                                        <hr />
+
                                         <h6 class="text-dark my-4">Sản phẩm</h6>
 
                                         foreach (var cart in (List<CartModels>)Session["Cart"])
@@ -273,5 +288,17 @@
                 required: true
             }
         }
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var momoRadio = document.getElementById("momo");
+        momoRadio.addEventListener("change", function () {
+            if (momoRadio.checked) {
+                document.getElementById("momoSelected").value = "true";
+            } else {
+                document.getElementById("momoSelected").value = "false";
+            }
+        });
     });
 </script>
