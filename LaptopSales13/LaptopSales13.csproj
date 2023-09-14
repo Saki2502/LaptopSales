@@ -519,6 +519,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MomoController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -2887,6 +2888,7 @@
     <Content Include="Views\Customer\MyProfile.cshtml" />
     <Content Include="Views\Customer\EditProfile.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Cart\momo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2894,6 +2896,7 @@
     <Folder Include="obj\" />
     <Folder Include="Reports\" />
     <Folder Include="Views\Branch\" />
+    <Folder Include="Views\Momo\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

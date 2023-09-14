@@ -101,7 +101,6 @@ namespace LaptopSales13.Controllers
             }
             else
             {
-
                 u.FirstName = frc["firstName"];
                 u.LastName = frc["lastName"];
                 u.PhoneNumber = frc["phone"];
@@ -113,12 +112,15 @@ namespace LaptopSales13.Controllers
                 db.Customers.Add(customer);
                 db.SaveChanges();
 
+                // Lấy giá trị từ radio button
+                string paymentMethod = frc["flexRadioDefaultPayment"];
+
                 //1. Lưu thông tin vào bảng Orders
                 var order = new LaptopSales13.Models.Order()
                 {
                     CustomerID = customer.CustomerID,
                     OrderDate = DateTime.Now,
-                    PayType = frc[""],
+                    PayType = paymentMethod,
                     Status = "Chờ xác nhận"
                 };
                 db.Orders.Add(order);
