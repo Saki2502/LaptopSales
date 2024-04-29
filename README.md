@@ -1,2 +1,2 @@
 # LaptopSales
-Bài tập lớn Lập trình CSDL
+Project use Asp.Net with EF database first
